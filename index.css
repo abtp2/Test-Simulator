@@ -1,0 +1,278 @@
+:root{
+--lbg: #fff;
+--lcolor: #000;
+--lblurbg: rgba(0,0,0,0.09);
+--dbg: #0d181a;
+--dcolor: #eaeaea;
+--dblurbg: rgba(255,255,255,0.09);
+}
+.light{
+--bg: var(--lbg);
+--color: var(--lcolor);
+--blurbg: var(--lblurbg);
+}
+.dark{
+--bg: var(--dbg);
+--color: var(--dcolor);
+--blurbg: var(--dblurbg);
+}
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: arial;
+}
+body{
+width: 100%;
+background: var(--bg);
+color: var(--color);
+}
+
+
+/* navbar */
+.nav{
+width: 100%;
+background: ;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 3vw;
+}
+.nav div{
+display: flex;
+align-items: center;
+}
+.nav div img{
+width: 55px;
+border-radius: 15px;
+}
+.nav div h1{
+font-size: 20px;
+font-weight: 700;
+font-family: fantasy !important;
+display: none;
+}
+.nav i{
+font-size: 25px;
+margin-right: 5px;
+background: var(--blurbg);
+padding: 10px;
+border-radius: 100%;
+}
+
+
+@media(min-width: 600px){
+.nav div h1{
+display: flex;
+margin-left: 1rem;
+}
+.nav{
+padding: 2vw;
+}}
+
+
+
+/* container */
+.container{
+width: 90%;	
+margin: 3rem auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: var(--blurbg);
+border-radius: 5px;
+padding: 1rem;
+}
+
+@media(min-width: 768px){
+.container{
+width: 80%;	
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-start;
+}
+}
+
+
+/* header */
+.header{
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.header h1{
+font-size: 30px;
+font-weight: 700;
+font-family: fantasy !important;
+}
+.header p{
+max-width: 350px;
+margin-top: 0.7rem;
+font-size: 15px;
+font-weight: 400;
+line-height: 1.5;
+}
+@media(min-width: 768px){
+.header{
+justify-content: flex-start !important;
+align-items: flex-start;
+padding: 0.5rem;
+}}
+
+/* box */
+.box{
+background: var(--bg);
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 2rem;
+padding: 1.5rem 1rem;
+}
+.box h1{
+font-size: 25px;
+font-weight: 600;
+}
+.box select{
+width: 90%;
+max-width: 300px;
+height: 45px;
+margin-top: 25px;
+border-radius: 5px;
+padding: 0 8px;
+background: var(--lblurbg);
+color: var(--color);
+border: 1px solid #767676;
+font-size: 14px;
+outline: 0;
+}
+.box select:active{
+outline: 5px solid var(--blurbg);
+}
+.box .uploadButton{
+width: 90%;
+max-width: 300px;
+height: 45px;
+margin-top: 15px;
+border-radius: 5px;
+padding: 0 8px;
+background: var(--lblurbg);
+color: var(--color);
+border: 1px solid #767676;
+font-size: 14px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.box .uploadButton p{
+width: 80%;
+max-width: auto;
+margin-top: 0px;
+border-radius: 0;
+font-size: 14px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.box .uploadButton i{
+font-size: 22px;
+color: #01bdfc;
+display: none;
+}
+.box .uploadButton:active{
+outline: 5px solid var(--blurbg);
+}
+.box p{
+width: 90%;
+max-width: 300px;
+margin-top: 18px;
+border-radius: 5px;
+font-size: 15px;
+}
+.box div{
+width: 90%;
+max-width: 300px;
+margin-top: 10px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
+.box div span{
+display: flex;
+align-items: center;
+background: var(--lblurbg);
+color: var(--color);
+border: 1px solid #767676;
+font-size: 13px;
+padding: 1px 5px;
+border-radius: 3px;
+margin-right: 5px;
+}
+.box div span input{
+width: 30px;
+height: 25px;
+border: 0;
+padding-left: 5px;
+background: transparent;
+color: var(--color);
+border: 0;
+outline: none;
+}
+
+.box button{
+width: 90%;
+max-width: 300px;
+height: 50px;
+margin-top: 25px;
+border-radius: 5px;
+padding: 0 8px;
+background: #01bdfc;
+color: #fff;
+font-weight: 900;
+font-size: 15px;
+border: 5px solid rgba(0,0,0,0.1);
+opacity: 0.8;
+pointer-events: none;
+}
+/* border: 5px solid #00ace4; */
+
+@media(min-width: 768px){
+.box{
+margin-top: 0;
+align-self: flex-start;
+}}
+
+
+
+
+/* pdf container */
+#pdfContainer{
+width: 90%;
+height: 500px;
+margin: 2rem auto;
+border: 1px solid #000;
+background: var(--bg);
+border: 2px solid var(--blurbg);
+border-radius: 3px;
+padding: 10px;
+overflow: scroll;
+display: none;
+}
+.canvas-wrapper{
+margin-bottom: 16px;
+}
+canvas{
+width: 100%;
+margin: 0 auto;
+display: block; 
+}
+
+@media(min-width: 768px){
+#pdfContainer{
+width: 80%;	
+}}

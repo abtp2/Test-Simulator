@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<link rel="stylesheet" href="icons/boxicons.css">
+				<link rel="stylesheet" href="index.css"></link>
+				<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.385/build/pdf.min.js"></script>
+				<title>Page title</title>
+</head>
+<body class="dark" onbeforeunload="">
+<!-- navbar -->
+<div class="nav">
+ <div>
+ 	<img src="logo.jpeg" alt="😡😡">
+  <h1>Test Simulator</h1>
+ </div>
+ <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i>
+</div>
+
+
+<!--  -->
+<div class="container">
+  <div class="header">
+	<h1>Welcome to <span style="color: #01bdfc;font-family: cursive;">Test Simulator</span></h1>
+	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena... bkl mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i>~ Ashutosh_dev</i></p>
+ </div>
+ <div class="box">
+ <h1>Select Details :</h1>
+ <select id="select">
+ 				<option>Select Exam</option>
+ 				<option>JEE Mains</option>
+ 				<option>NEET</option>
+ </select>
+ <div class="uploadButton"><p>Upload PDF</p> <i class="bx bx-check-circle"></i></div>
+ <p>No. of questions</p>
+ <div>
+ <span>P :<input type="number" placeholder="0"></span>
+ <span>C :<input type="number" placeholder="0"></span>
+ <span>M/B :<input type="number" placeholder="0"></span>
+ </div>
+ <button id="startTest" onclick="startTest()">Start Test</button>
+ </div>
+</div>
+<!-- container ended -->
+<!-- file input -->
+<input type="file" accept="application/pdf" id="fileInput" hidden>
+
+
+<!-- pdf container -->
+<div id="pdfContainer"></div>
+
+<script>
+function changeTheme(){
+var x = document.body.classList;
+var y = document.getElementsByClassName("themeIcon")[0];
+if(x.contains("light")){
+x.replace("light", "dark");
+y.classList.replace("bx-moon", "bxs-sun");
+}
+else if(x.contains("dark")){
+x.replace("dark", "light");
+y.classList.replace("bxs-sun", "bx-moon");
+}}
+
+document.getElementsByClassName("uploadButton")[0].onclick = function(){
+document.getElementById("fileInput").click();
+}
+
+//select main or neet
+document.getElementById("select").onchange = function(){
+var p = document.querySelectorAll(".box div span input")[0];
+var c = document.querySelectorAll(".box div span input")[1];
+var mb = document.querySelectorAll(".box div span input")[2];
+
+if(this.value=="JEE Mains"){
+p.value =30;c.value =30;mb.value =30;
+}
+if(this.value=="NEET"){
+p.value =50;c.value =50;mb.value =80;
+}}
+
+
+
+
+
+//pdf choose
+let selectedPDF;
+document.getElementById("fileInput").addEventListener('change', function(event) {
+const file = event.target.files[0];
+const button = document.getElementsByClassName("uploadButton")[0];
+if(file && file.type === 'application/pdf'){
+ selectedPDF = file;
+ button.querySelector("p").innerHTML = selectedPDF.name;
+ document.querySelector(".box .uploadButton i").style.display ="block";
+} 
+else{
+alert("Please select a valid PDF file.");
+}
+});
+
+
+// make able start button
+function able(){
+var x = document.getElementById("select");
+var y = document.getElementsByClassName("uploadButton")[0];
+var z = document.getElementById("startTest");
+var p = document.querySelectorAll(".box div span input")[0];
+var c = document.querySelectorAll(".box div span input")[1];
+var mb = document.querySelectorAll(".box div span input")[2];
+
+if(x.value !=="Select Exam" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !==""){
+z.style.opacity ="1";
+z.style.pointerEvents ="auto";
+}
+else{
+z.style.opacity ="0.8";
+z.style.pointerEvents ="none";	
+}}
+
+setInterval(able, 500);
+
+
+
+
+
+
+// PDF JS
+function renderPDF(url, canvasContainer, options) {
+    options = options || { scale: 1 };        
+    function renderPage(page) {
+        var viewport = page.getViewport(options.scale);
+        var wrapper = document.createElement("div");
+        wrapper.className = "canvas-wrapper";
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };        
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        wrapper.appendChild(canvas)
+        canvasContainer.appendChild(wrapper);
+        
+        page.render(renderContext);
+    }    
+    function renderPages(pdfDoc) {
+        for(var num = 1; num <= pdfDoc.numPages; num++)
+            pdfDoc.getPage(num).then(renderPage);
+    }
+    PDFJS.disableWorker = true;
+    PDFJS.getDocument(url).then(renderPages);
+}   
+// PDF JS
+
+let srcFile;
+function startTest(){
+const x = document.getElementById("pdfContainer");
+x.style.display ="block";
+srcFile = URL.createObjectURL(selectedPDF);
+renderPDF(srcFile, x);
+
+alert("Website is under development, it's not completed yet 👍🏻");
+}
+</script>
+</body>
+</html>
