@@ -2,13 +2,23 @@
 <html lang="en">
 <head>
 				<meta charset="UTF-8">
-				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
 				<link rel="stylesheet" href="icons/boxicons.css">
-				<link rel="stylesheet" href="index.css"></link>
+			 <link rel="stylesheet" href="index.css"></link>				
 				<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.385/build/pdf.min.js"></script>
-				<title>Page title</title>
+				<title>Test Simulator</title>
 </head>
 <body class="dark" onbeforeunload="">
+<!-- custom alert -->	
+<div id="calert">
+ <div><span>Alert !</span><i onclick="closeCalert()" class="bx bx-x"></i></div>
+ <p id="calertPara" contenteditable="true">Hello dagadiyo !<br>How are you<br>hello</p>
+ <div id="calertButtons">
+ 	<button>Cancel</button>
+ 	<button>OK</button>
+ </div>
+</div>
+		
 <!-- navbar -->
 <div class="nav">
  <div>
@@ -22,7 +32,7 @@
 <!--  -->
 <div class="container">
   <div class="header">
-	<h1>Welcome to <span style="color: #01bdfc;font-family: cursive;">Test Simulator</span></h1>
+	<h1>Welcome to <span style="color: #00a7dd;font-family: cursive;">Test Simulator</span></h1>
 	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena... bkl mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i>~ Ashutosh_dev</i></p>
  </div>
  <div class="box">
@@ -33,7 +43,7 @@
  				<option>NEET</option>
  </select>
  <div class="uploadButton"><p>Upload PDF</p> <i class="bx bx-check-circle"></i></div>
- <p>No. of questions</p>
+ <p>No. of questions (custom)</p>
  <div>
  <span>P :<input type="number" placeholder="0"></span>
  <span>C :<input type="number" placeholder="0"></span>
@@ -47,20 +57,117 @@
 <input type="file" accept="application/pdf" id="fileInput" hidden>
 
 
-<!-- pdf container -->
-<div id="pdfContainer"></div>
+
+
+
+
+
+
+
+<!-- Main test box-->
+<div id="testBox">
+<div id="testNav">
+ <p><i class="bx bx-stopwatch"></i><span id="timer">11:30:28</span></p>
+ <div><button onclick="submitTest()">Submit</button>
+ <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i></div>
+</div>
+
+<section>
+<div id="pdfParent">
+	<div id="pdfContainer"></div>
+</div>
+
+<div id="optParent">
+ <div class="optChild" id="pOpt">
+   <span class="optToggle"><h1>Physics</h1><i class="bx bx-chevron-down"></i></span>
+   <div>
+   <p>1. <input type="radio" opt="a" name="p1">
+         <input type="radio" opt="b" name="p1">
+         <input type="radio" opt="c" name="p1">
+         <input type="radio" opt="d" name="p1"></p>
+   <p>2. <input type="radio" name="p2">
+         <input type="radio" name="p2">
+         <input type="radio" name="p2">
+         <input type="radio" name="p2"></p>
+   <p>3. <input type="radio" name="p3">
+         <input type="radio" name="p3">
+         <input type="radio" name="p3">
+         <input type="radio" name="p3"></p>
+   <p>4. <input type="radio" name="p4">
+         <input type="radio" name="p4">
+         <input type="radio" name="p4">
+         <input type="radio" name="p4"></p>
+   <p>5. <input type="number" name="p5"></p>
+   <p>6. <input type="number" name="p6"></p>
+   <p>7. <input type="number" name="p7"></p>
+   <p>8. <input type="number" name="p8"></p>
+    
+   </div>
+ </div>
+ <div class="optChild" id="cOpt">
+   <span class="optToggle"><h1>Chemistry</h1><i class="bx bx-chevron-down"></i></span>
+   <div>
+   <p>1. <input type="radio" name="c1">
+         <input type="radio" name="c1">
+         <input type="radio" name="c1">
+         <input type="radio" name="c1"></p>
+   <p>2. <input type="radio" name="c2">
+         <input type="radio" name="c2">
+         <input type="radio" name="c2">
+         <input type="radio" name="c2"></p>
+   <p>3. <input type="radio" name="c3">
+         <input type="radio" name="c3">
+         <input type="radio" name="c3">
+         <input type="radio" name="c3"></p>
+   <p>4. <input type="radio" name="c3">
+         <input type="radio" name="c4">
+         <input type="radio" name="c4">
+         <input type="radio" name="c4"></p>
+    
+   </div>
+ </div>
+ <div class="optChild" id="mbOpt">
+   <span class="optToggle"><h1>Maths</h1><i class="bx bx-chevron-down"></i></span>
+   <div>
+   <p>1. <input type="radio" name="mb1">
+         <input type="radio" name="mb1">
+         <input type="radio" name="mb1">
+         <input type="radio" name="mb1"></p>
+   <p>2. <input type="radio" name="mb2">
+         <input type="radio" name="mb2">
+         <input type="radio" name="mb2">
+         <input type="radio" name="mb2"></p>
+   <p>3. <input type="radio" name="mb3">
+         <input type="radio" name="mb3">
+         <input type="radio" name="mb3">
+         <input type="radio" name="mb3"></p>
+   <p>4. <input type="radio" name="mb4">
+         <input type="radio" name="mb4">
+         <input type="radio" name="mb4">
+         <input type="radio" name="mb4"></p>
+    
+   </div>
+ </div>
+</div>
+</section>
+</div>
+
+
 
 <script>
 function changeTheme(){
 var x = document.body.classList;
 var y = document.getElementsByClassName("themeIcon")[0];
+var z = document.getElementsByClassName("themeIcon")[1];
 if(x.contains("light")){
 x.replace("light", "dark");
 y.classList.replace("bx-moon", "bxs-sun");
+z.classList.replace("bx-moon", "bxs-sun");
 }
 else if(x.contains("dark")){
 x.replace("dark", "light");
 y.classList.replace("bxs-sun", "bx-moon");
+z.classList.replace("bxs-sun", "bx-moon");
 }}
 
 document.getElementsByClassName("uploadButton")[0].onclick = function(){
@@ -82,8 +189,6 @@ p.value =50;c.value =50;mb.value =80;
 
 
 
-
-
 //pdf choose
 let selectedPDF;
 document.getElementById("fileInput").addEventListener('change', function(event) {
@@ -98,6 +203,10 @@ else{
 alert("Please select a valid PDF file.");
 }
 });
+
+//
+document.getElementById("fileInput").oninput = function(){
+}
 
 
 // make able start button
@@ -114,7 +223,7 @@ z.style.opacity ="1";
 z.style.pointerEvents ="auto";
 }
 else{
-z.style.opacity ="0.8";
+z.style.opacity ="0.6";
 z.style.pointerEvents ="none";	
 }}
 
@@ -126,10 +235,12 @@ setInterval(able, 500);
 
 
 // PDF JS
+var pdfScale = 1;
 function renderPDF(url, canvasContainer, options) {
-    options = options || { scale: 1 };        
-    function renderPage(page) {
-        var viewport = page.getViewport(options.scale);
+   // options = options || { scale: 1 };        
+    function renderPage(page){
+        var scale = pdfScale;
+        var viewport = page.getViewport(scale);
         var wrapper = document.createElement("div");
         wrapper.className = "canvas-wrapper";
         var canvas = document.createElement('canvas');
@@ -154,15 +265,75 @@ function renderPDF(url, canvasContainer, options) {
 }   
 // PDF JS
 
+
+//StartTest 
 let srcFile;
+let scrollInterval;
 function startTest(){
-const x = document.getElementById("pdfContainer");
+const x = document.getElementById("testBox");
+var y = document.querySelectorAll(".canvas-wrapper");
 x.style.display ="block";
 srcFile = URL.createObjectURL(selectedPDF);
-renderPDF(srcFile, x);
 
-alert("Website is under development, it's not completed yet 👍🏻");
+if(y[0]){
+y.forEach(element => {
+if(element){
+element.remove();				
+}});
 }
+renderPDF(srcFile, document.getElementById("pdfContainer"), 5);
+//zoomPan();
+document.body.style.overflow ="hidden";
+
+scrollInterval = setInterval(() => {
+  window.scrollTo(0, 0);
+}, 500);
+}
+
+
+//custom alert
+function calert(x){
+var x = document.getElementById("calert");
+x.style.transition ="all 0.4s";
+x.style.top ="22%";
+document.body.classList.add("calert");
+}
+function closeCalert(x){
+var x = document.getElementById("calert");
+x.style.transition ="all 0";
+x.style.top ="-400%";
+document.body.classList.remove("calert");
+}
+
+
+
+
+//option toggle
+document.querySelectorAll(".optToggle").forEach(element =>{
+element.onclick = function(){
+var optChild = this.parentElement;
+if(Math.round(optChild.getBoundingClientRect().height) == 50){
+optChild.style.height ="150px";
+optChild.style.overflow ="scroll";
+this.querySelector("i").style.transform ="rotate(180deg)";
+}
+else{
+optChild.style.height ="50px";
+optChild.style.overflow ="hidden";
+this.querySelector("i").style.transform ="rotate(0deg)";
+}
+}});
+
+
+//submit test
+function submitTest(){
+const x = document.getElementById("testBox");
+x.style.display ="none";	
+document.body.style.overflow ="scroll";
+clearInterval(scrollInterval);
+}
+
+
 </script>
 </body>
 </html>
