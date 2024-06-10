@@ -337,7 +337,7 @@ background: #0097c9;
 #testBox{
 width: 100%;
 height: 100vh;
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
 z-index: 999;
@@ -497,10 +497,10 @@ appearance: none;
 border-radius: 100%;
 accent-color: #00b6f1;
 border: 3px solid var(--blurbg);
-box-shadow: 0 0 0 1px var(--color);
+box-shadow: 0 0 0 0.5px var(--color);
 width: 16px;
 height: 16px;
-background: var(--blurbg);
+background: var(--bg);
 margin-left: 6px;
 }
 .optChild div p input[type="radio"]:checked{

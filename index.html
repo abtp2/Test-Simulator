@@ -3,26 +3,28 @@
 <head>
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+				<meta name="theme-color" content="#00a7dd">
 				<link rel="stylesheet" href="icons/boxicons.css">
-			 <link rel="stylesheet" href="index.css"></link>				
-				<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.385/build/pdf.min.js"></script>
+			 <link rel="stylesheet" href="index.css"></link>
+			 <link rel="icon" type="image/png" href="logo.png">
+				<script src="pdfjs/pdf.js"></script>
 				<title>Test Simulator</title>
 </head>
-<body class="dark" onbeforeunload="">
+<body class="dark">
 <!-- custom alert -->	
 <div id="calert">
  <div><span>Alert !</span><i onclick="closeCalert()" class="bx bx-x"></i></div>
- <p id="calertPara" contenteditable="true">Hello dagadiyo !<br>How are you<br>hello</p>
+ <p id="calertPara">Hello dagadiyo !<br>How are you<br>hello</p>
  <div id="calertButtons">
- 	<button>Cancel</button>
- 	<button>OK</button>
+ 	<button id="cancelAlert">Cancel</button>
+ 	<button id="okAlert">OK</button>
  </div>
 </div>
 		
 <!-- navbar -->
 <div class="nav">
  <div>
- 	<img src="logo.jpeg" alt="😡😡">
+ 	<img src="logo.png" onclick="testFunc()" alt="😡😡">
   <h1>Test Simulator</h1>
  </div>
  <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i>
@@ -155,6 +157,7 @@
 
 
 <script>
+//theme changer 
 function changeTheme(){
 var x = document.body.classList;
 var y = document.getElementsByClassName("themeIcon")[0];
@@ -163,18 +166,20 @@ if(x.contains("light")){
 x.replace("light", "dark");
 y.classList.replace("bx-moon", "bxs-sun");
 z.classList.replace("bx-moon", "bxs-sun");
+document.querySelector('meta[name="theme-color"]').setAttribute('content', "#0d181a");
 }
 else if(x.contains("dark")){
 x.replace("dark", "light");
 y.classList.replace("bxs-sun", "bx-moon");
 z.classList.replace("bxs-sun", "bx-moon");
+document.querySelector('meta[name="theme-color"]').setAttribute('content', "#ffffff");
 }}
 
 document.getElementsByClassName("uploadButton")[0].onclick = function(){
 document.getElementById("fileInput").click();
 }
 
-//select main or neet
+//select mains or neet
 document.getElementById("select").onchange = function(){
 var p = document.querySelectorAll(".box div span input")[0];
 var c = document.querySelectorAll(".box div span input")[1];
@@ -186,6 +191,13 @@ p.value =30;c.value =30;mb.value =30;
 if(this.value=="NEET"){
 p.value =50;c.value =50;mb.value =80;
 }}
+
+
+//prevnt refresh
+window.addEventListener('beforeunload', (event) =>{
+event.preventDefault();
+event.returnValue = "Do you want to exit ? /n All the items save will be deleted"; 
+});
 
 
 
@@ -266,12 +278,38 @@ function renderPDF(url, canvasContainer, options) {
 // PDF JS
 
 
+
+//custom alert
+function cAlert(alertContent){
+var x = document.getElementById("calert");
+x.style.transition ="all 0.4s";
+x.style.top ="22%";
+document.body.classList.add("calert");
+document.getElementById("calertPara").innerHTML =alertContent;
+
+return new Promise((resolve, reject) =>{
+document.getElementById("okAlert").onclick = function(){resolve(true)}
+document.getElementById("cancelAlert").onclick = function(){resolve(false)}
+});
+}
+
+//close alert
+function closeCalert(){
+var x = document.getElementById("calert");
+x.style.transition ="all 0";
+x.style.top ="-400%";
+document.body.classList.remove("calert");
+}
+
 //StartTest 
 let srcFile;
 let scrollInterval;
-function startTest(){
+async function startTest(){
+const result = await cAlert("<b>Are you sure to start the test?</b><br><br>Test will start immediately if u press ok");
+if(result){
 const x = document.getElementById("testBox");
 var y = document.querySelectorAll(".canvas-wrapper");
+closeCalert();
 x.style.display ="block";
 srcFile = URL.createObjectURL(selectedPDF);
 
@@ -280,30 +318,11 @@ y.forEach(element => {
 if(element){
 element.remove();				
 }});
-}
+}// 2nd if end
 renderPDF(srcFile, document.getElementById("pdfContainer"), 5);
-//zoomPan();
-document.body.style.overflow ="hidden";
-
-scrollInterval = setInterval(() => {
-  window.scrollTo(0, 0);
-}, 500);
-}
-
-
-//custom alert
-function calert(x){
-var x = document.getElementById("calert");
-x.style.transition ="all 0.4s";
-x.style.top ="22%";
-document.body.classList.add("calert");
-}
-function closeCalert(x){
-var x = document.getElementById("calert");
-x.style.transition ="all 0";
-x.style.top ="-400%";
-document.body.classList.remove("calert");
-}
+}// 1st if end
+else{closeCalert()}
+}// function end
 
 
 
@@ -329,11 +348,7 @@ this.querySelector("i").style.transform ="rotate(0deg)";
 function submitTest(){
 const x = document.getElementById("testBox");
 x.style.display ="none";	
-document.body.style.overflow ="scroll";
-clearInterval(scrollInterval);
 }
-
-
 </script>
 </body>
 </html>
