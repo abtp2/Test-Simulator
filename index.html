@@ -261,6 +261,7 @@ element.oninput = function(){
 if(this.value.length > 2){
 this.value = this.value.slice(0, 2);
 }
+this.value = this.value.replace(/[+\-.]/g, '');
 }});
 
 
