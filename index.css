@@ -178,6 +178,10 @@ border: 1px solid #767676;
 font-size: 14px;
 outline: 0;
 }
+.box select option{
+background: var(--bg);
+color: var(--color);
+}
 .box select:active{
 outline: 5px solid var(--blurbg);
 }
@@ -422,14 +426,25 @@ border: 3px solid rgba(0,0,0,0.07);
 #testNav div button:active{
 background: #0097c9;
 }
-#testNav div i{
+#testNav div i:nth-of-type(2){
 font-size: 22px;
 margin-left: 5px;
 background: var(--bg);
 padding: 10px;
 border-radius: 100%;
 }
-
+#testNav div i:nth-of-type(1){
+font-size: 24px;
+margin-right: 10px;
+background: var(--bg);
+padding: 4px;
+border-radius: 100%;
+border: 0.1px solid var(--color);
+}
+@media(min-width: 600px){
+#testNav div i:nth-of-type(1){
+display: none;
+}}
 
 /* pdf container */
 #pdfParent{

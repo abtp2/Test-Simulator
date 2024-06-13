@@ -72,7 +72,7 @@
 <div id="testBox">
 <div id="testNav">
  <p><i class="bx bx-stopwatch"></i><span id="timer">00:00:00</span></p>
- <div><button onclick="submitTest()">Submit</button>
+ <div><i class="bx bx-chevron-down" onclick="testScrollDown()" abbr=""></i><button onclick="submitTest()">Submit</button>
  <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i></div>
 </div>
 
@@ -211,6 +211,15 @@ event.preventDefault();
 event.returnValue = "Do you want to exit ? /n All the items save will be deleted"; 
 });
 
+
+//scroll down test box answers 
+if(document.getElementById("testBox")){
+function testScrollDown(){
+  document.querySelector("#testBox").scrollTo({
+    top: document.querySelector("#testBox").scrollHeight,
+    behavior: 'smooth'
+  });		
+}}
 
 
 //pdf choose
