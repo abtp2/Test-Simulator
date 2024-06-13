@@ -4,6 +4,7 @@
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
 				<meta name="theme-color" content="#0d181a">
+				<link rel="manifest" href="manifest.json">
 				<link rel="stylesheet" href="icons/boxicons.css">
 			 <link rel="stylesheet" href="index.css"></link>
 			 <link rel="icon" type="image/png" href="logo.png">
@@ -24,7 +25,7 @@
 <!-- navbar -->
 <div class="nav">
  <div>
- 	<img src="logo.png" onclick="testFunc()" alt="😡😡">
+ 	<img src="logo.png" onclick="testFunc()" alt="🥶">
   <h1>Test Simulator</h1>
  </div>
  <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i>
@@ -665,6 +666,20 @@ const radioButtons = document.querySelectorAll('input[type="radio"]');
         });
       });
 }
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function(){
+  if ("serviceWorker" in navigator){
+    navigator.serviceWorker
+      .register("serviceWorker.js")
+      .then(res => console.log("Service worker registered"))
+      .catch(err => console.error("Service worker registration failed", err));
+  }
+});
+
 </script>
 </body>
 </html>

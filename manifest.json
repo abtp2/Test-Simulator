@@ -1,0 +1,11 @@
+{
+"name": "Test Simulator", 
+"short_name": "T.S.",
+"start_url": "index.html", 
+"display": "standalone",
+"theme_color": "#0d181a", 
+"orientation": "any",
+"icons": [{
+      "src": "logo.png", "type": "image/png", "sizes": "any" 
+         }]
+}
