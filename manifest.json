@@ -5,9 +5,9 @@
   "display": "standalone",
   "theme_color": "#0d181a",
   "background_color": "#0d181a",
-  "orientation": "any",
+  "orientation": "natural",
   "icons": [{
-    "src": "LogoTS.png",
+    "src": "logoTS.png",
     "type": "image/png",
     "sizes": "any"
   }]
