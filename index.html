@@ -674,7 +674,7 @@ const radioButtons = document.querySelectorAll('input[type="radio"]');
 document.addEventListener("DOMContentLoaded", function(){
   if ("serviceWorker" in navigator){
     navigator.serviceWorker
-      .register("/serviceWorker.js")
+      .register("serviceWorker.js")
       .then(res => console.log("Service worker registered"))
       .catch(err => console.error("Service worker registration failed", err));
   }
