@@ -465,7 +465,24 @@ width: 100%;
 height: 100%;
 margin: 0 auto;
 overflow: scroll;
+overflow-x: hidden;
 }
+#pdfContainer::-webkit-scrollbar{
+width: 10px;
+background: transparent;
+}
+#pdfContainer::-webkit-scrollbar-track{
+background: transparent;
+box-shadow: inset 0 0 0 10px transparent;
+}
+#pdfContainer::-webkit-scrollbar-thumb{
+background: #0d181a;
+}
+#pdfContainer{
+scrollbar-width: thin;
+scrollbar-color: #0d181a transparent;
+}
+
 .canvas-wrapper{
 width: 100%;
 margin-bottom: 16px;
@@ -775,8 +792,3 @@ background: var(--blurbg);
 border-radius: 2px;
 padding: 4px;
 }
-
-
-
-
-
