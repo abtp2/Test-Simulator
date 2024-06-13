@@ -35,7 +35,7 @@
 <div class="container">
   <div class="header">
 	<h1>Welcome to <span style="color: #00a7dd;font-family: cursive;">Test Simulator</span></h1>
-	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena... bkl mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i>~ Ashutosh_dev</i></p>
+	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena... bkl mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i href="https://testsimulator.netlify.app">~ Ashutosh_dev</i></p>
  </div>
  <div class="box">
  <h1>Select Details :</h1>
@@ -44,6 +44,7 @@
  				<option>JEE Mains</option>
  				<option>NEET</option>
  </select>
+ <input type="text" id="testName" placeholder="Name of your Test">
  <div class="uploadButton"><p>Upload PDF</p> <i class="bx bx-check-circle"></i></div>
  <p>No. of questions (custom)</p>
  <div>
@@ -69,7 +70,7 @@
 <!-- Main test box-->
 <div id="testBox">
 <div id="testNav">
- <p><i class="bx bx-stopwatch"></i><span id="timer">11:30:28</span></p>
+ <p><i class="bx bx-stopwatch"></i><span id="timer">00:00:00</span></p>
  <div><button onclick="submitTest()">Submit</button>
  <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i></div>
 </div>
@@ -82,71 +83,33 @@
 <div id="optParent">
  <div class="optChild" id="pOpt">
    <span class="optToggle"><h1>Physics</h1><i class="bx bx-chevron-down"></i></span>
-   <div>
+   <div><!--  
    <p>1. <input type="radio" opt="a" name="p1">
          <input type="radio" opt="b" name="p1">
          <input type="radio" opt="c" name="p1">
          <input type="radio" opt="d" name="p1"></p>
-   <p>2. <input type="radio" name="p2">
-         <input type="radio" name="p2">
-         <input type="radio" name="p2">
-         <input type="radio" name="p2"></p>
-   <p>3. <input type="radio" name="p3">
-         <input type="radio" name="p3">
-         <input type="radio" name="p3">
-         <input type="radio" name="p3"></p>
-   <p>4. <input type="radio" name="p4">
-         <input type="radio" name="p4">
-         <input type="radio" name="p4">
-         <input type="radio" name="p4"></p>
    <p>5. <input type="number" name="p5"></p>
    <p>6. <input type="number" name="p6"></p>
    <p>7. <input type="number" name="p7"></p>
-   <p>8. <input type="number" name="p8"></p>
-    
+   <p>8. <input type="number" name="p8"></p> -->    
    </div>
  </div>
  <div class="optChild" id="cOpt">
    <span class="optToggle"><h1>Chemistry</h1><i class="bx bx-chevron-down"></i></span>
-   <div>
-   <p>1. <input type="radio" name="c1">
-         <input type="radio" name="c1">
-         <input type="radio" name="c1">
-         <input type="radio" name="c1"></p>
-   <p>2. <input type="radio" name="c2">
-         <input type="radio" name="c2">
-         <input type="radio" name="c2">
-         <input type="radio" name="c2"></p>
-   <p>3. <input type="radio" name="c3">
-         <input type="radio" name="c3">
-         <input type="radio" name="c3">
-         <input type="radio" name="c3"></p>
-   <p>4. <input type="radio" name="c3">
-         <input type="radio" name="c4">
-         <input type="radio" name="c4">
-         <input type="radio" name="c4"></p>
-    
+   <div><!--  
+   <p>1. <input type="radio" opt="a" name="c1">
+         <input type="radio" opt="b" name="c1">
+         <input type="radio" opt="c" name="c1">
+        <input type="radio" opt="d" name="c1"></p>-->
    </div>
  </div>
  <div class="optChild" id="mbOpt">
    <span class="optToggle"><h1>Maths</h1><i class="bx bx-chevron-down"></i></span>
-   <div>
-   <p>1. <input type="radio" name="mb1">
-         <input type="radio" name="mb1">
-         <input type="radio" name="mb1">
-         <input type="radio" name="mb1"></p>
-   <p>2. <input type="radio" name="mb2">
-         <input type="radio" name="mb2">
-         <input type="radio" name="mb2">
-         <input type="radio" name="mb2"></p>
-   <p>3. <input type="radio" name="mb3">
-         <input type="radio" name="mb3">
-         <input type="radio" name="mb3">
-         <input type="radio" name="mb3"></p>
-   <p>4. <input type="radio" name="mb4">
-         <input type="radio" name="mb4">
-         <input type="radio" name="mb4">
-         <input type="radio" name="mb4"></p>
+   <div><!--
+   <p>1. <input type="radio" opt="a" name="mb1">
+         <input type="radio" opt="b" name="mb1">
+         <input type="radio" opt="c" name="mb1">
+       <input type="radio" opt="d" name="mb1"></p>-->
     
    </div>
  </div>
@@ -154,6 +117,44 @@
 </section>
 </div>
 
+
+<!-- Result -->
+<div id="result">
+ <h1>Test Results</h1>
+ <p>Physics</p>
+ <div class="answers" id="pAns"><!--
+ 	<span>1.(A)</span><span>2.(B)</span> -->
+ </div>
+ <p>Chemistry</p>
+ <div class="answers" id="cAns"></div>
+ <p>Maths</p>
+ <div class="answers" id="mbAns"></div>
+ <div><button>Download</button><button onclick="resultOk()">Ok</button></div>
+</div>
+
+
+<!-- Later Result 
+<div id="Lresult">
+ <h1>Test Results</h1>
+ <p>Physics</p>
+ <div class="Lanswers" id="LpAns"></div>
+ <p>Chemistry</p>
+ <div class="Lanswers" id="LcAns"></div>
+ <p>Maths</p>
+ <div class="Lanswers" id="LmbAns"></div>
+ <div><button onclick="LresultOk()">Close</button></div>
+</div> -->
+
+
+<!-- Stored Result -->
+<div id="storedBox">
+<h1></h1>
+ <div class="storedResult" id="">
+ 	<p>Date:<span id="resDate">13-12-2020</span>
+ 	<p>Time: 14:37<span id="resTime"></span></p>
+ 	<h2>Physics Test</h2>
+ </div>
+</div>
 
 
 <script>
@@ -226,11 +227,12 @@ function able(){
 var x = document.getElementById("select");
 var y = document.getElementsByClassName("uploadButton")[0];
 var z = document.getElementById("startTest");
+var a = document.getElementById("testName");
 var p = document.querySelectorAll(".box div span input")[0];
 var c = document.querySelectorAll(".box div span input")[1];
 var mb = document.querySelectorAll(".box div span input")[2];
 
-if(x.value !=="Select Exam" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !==""){
+if(x.value !=="Select Exam" & a.value !=="" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !==""){
 z.style.opacity ="1";
 z.style.pointerEvents ="auto";
 }
@@ -303,7 +305,13 @@ document.body.classList.remove("calert");
 
 //StartTest 
 let srcFile;
-let scrollInterval;
+let selectedExam;
+let numberP; 
+let numberC;
+let numberMB;
+var pOpt = document.getElementById("pOpt");
+var cOpt = document.getElementById("cOpt");
+var mbOpt = document.getElementById("mbOpt");
 async function startTest(){
 const result = await cAlert("<b>Are you sure to start the test?</b><br><br>Test will start immediately if u press ok");
 if(result){
@@ -319,7 +327,59 @@ if(element){
 element.remove();				
 }});
 }// 2nd if end
-renderPDF(srcFile, document.getElementById("pdfContainer"), 5);
+renderPDF(srcFile, document.getElementById("pdfContainer"), 1);
+
+selectedExam=document.getElementById("select").value;
+numberP = parseInt(document.querySelector(".box div span:nth-of-type(1) input").value);
+numberC = parseInt(document.querySelector(".box div span:nth-of-type(2) input").value);
+numberMB = parseInt(document.querySelector(".box div span:nth-of-type(3) input").value);
+console.log(selectedExam + numberP + numberC + numberMB);
+
+
+if(selectedExam=="JEE Mains"){
+document.getElementsByClassName("optToggle")[2].querySelector("h1").innerHTML ="Maths";
+document.querySelectorAll("#result p")[2].innerHTML ="Maths";
+ if(numberP==30 & numberC==30 & numberMB==30){
+   for(i=1;i< 21;i++){
+   pOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="p${i}"><input type="radio" opt="B" name="p${i}"><input type="radio" opt="C" name="p${i}"><input type="radio" opt="D" name="p${i}"></p>`;
+   cOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="c${i}"><input type="radio" opt="B" name="c${i}"><input type="radio" opt="C" name="c${i}"><input type="radio" opt="D" name="c${i}"></p>`;
+   mbOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="mb${i}"><input type="radio" opt="B" name="mb${i}"><input type="radio" opt="C" name="mb${i}"><input type="radio" opt="D" name="mb${i}"></p>`;
+   }
+   for(i=21;i< 31;i++){
+   pOpt.querySelector("div").innerHTML +=`<p>${i}.<input type="number" name="p{i}"></p>`;
+   cOpt.querySelector("div").innerHTML +=`<p>${i}.<input type="number" name="p{i}"></p>`;
+   mbOpt.querySelector("div").innerHTML +=`<p>${i}.<input type="number" name="p{i}"></p>`;
+   }
+ }
+ else{
+ for(i=1;i< (numberP+1);i++){
+	pOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="p${i}"><input type="radio" opt="B" name="p${i}"><input type="radio" opt="C" name="p${i}"><input type="radio" opt="D" name="p${i}"></p>`;
+	}
+	for(i=1;i< (numberC+1);i++){
+	cOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="c${i}"><input type="radio" opt="B" name="c${i}"><input type="radio" opt="C" name="c${i}"><input type="radio" opt="D" name="c${i}"></p>`;
+	}
+	for(i=1;i< (numberMB+1);i++){
+	mbOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="mb${i}"><input type="radio" opt="B" name="mb${i}"><input type="radio" opt="C" name="mb${i}"><input type="radio" opt="D" name="mb${i}"></p>`;
+  }
+ }
+startCountdown(Math.round(parseInt(numberP)*2 + parseInt(numberC)*2 + parseInt(numberMB)*2));
+makeRadioCorrect();
+}
+if(selectedExam=="NEET"){
+document.getElementsByClassName("optToggle")[2].querySelector("h1").innerHTML ="Biology";
+document.querySelectorAll("#result p")[2].innerHTML ="Biology";
+  for(i=1;i< (numberP+1);i++){
+	pOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="p${i}"><input type="radio" opt="B" name="p${i}"><input type="radio" opt="C" name="p${i}"><input type="radio" opt="D" name="p${i}"></p>`;
+	}
+	for(i=1;i< (numberC+1);i++){
+	cOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="c${i}"><input type="radio" opt="B" name="c${i}"><input type="radio" opt="C" name="c${i}"><input type="radio" opt="D" name="c${i}"></p>`;
+	}
+	for(i=1;i< (numberMB+1);i++){
+	mbOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="mb${i}"><input type="radio" opt="B" name="mb${i}"><input type="radio" opt="C" name="mb${i}"><input type="radio" opt="D" name="mb${i}"></p>`;
+  }  startCountdown(Math.round(parseInt(numberP)*1.1111111111 + parseInt(numberC)*1.1111111111 + parseInt(numberMB)*1.1111111111));
+makeRadioCorrect();  
+}
+
 }// 1st if end
 else{closeCalert()}
 }// function end
@@ -345,9 +405,190 @@ this.querySelector("i").style.transform ="rotate(0deg)";
 
 
 //submit test
-function submitTest(){
-const x = document.getElementById("testBox");
-x.style.display ="none";	
+async function submitTest(){
+const result = await cAlert("<b>Are you sure to submit the test?");
+if(result){
+closeCalert();
+frsubmit();
+}
+else{
+closeCalert();
+}}
+
+
+
+//time
+let interval;
+function startCountdown(minutes){
+  let totalSeconds = minutes * 60;
+  const countdownElement = document.getElementById("timer");
+
+   interval = setInterval(() => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+
+    countdownElement.textContent = `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+    if(totalSeconds ===  Math.round(parseInt(minutes)*3.36)){
+      document.getElementById("timer").style.color ="#e7001c";
+    }
+    if(totalSeconds === 0) {
+      alert("Time's up!");
+      clearInterval(interval);
+    }
+
+    totalSeconds--;
+  }, 1000);
+}
+
+
+function frsubmit(){
+for(i=1;i < pOpt.getElementsByTagName("p").length+1;i++){
+var x = 	pOpt.getElementsByTagName("p");
+ if(x[i-1].querySelector("input").getAttribute("type") !=="number"){
+   let selectedOption;
+ 	 for(const r of x[i-1].querySelectorAll(`[name="p${i}"]`)){
+ 	  if(r.checked){
+ 	  selectedOption =`(${r.getAttribute('opt')})`;
+ 	  break;}
+ 	  else{selectedOption ="NA"}
+ 	 }
+ 	 document.getElementById("pAns").innerHTML +=`<span>${i}.${selectedOption}</span>`;
+ }//1st if
+  if(x[i-1].querySelector("input").getAttribute("type") =="number"){
+ let selectedNum;
+  if(x[i-1].querySelector("input").value !=""){
+  selectedNum =`(${x[i-1].querySelector("input").value})`;
+  }
+  else{selectedNum ="NA";}
+ document.getElementById("pAns").innerHTML +=`<span>${i}.${selectedNum}</span>`;
+ }//2nd if
+}//1st for
+
+for(i=1;i < cOpt.getElementsByTagName("p").length+1;i++){
+var x = 	cOpt.getElementsByTagName("p");
+ if(x[i-1].querySelector("input").getAttribute("type") !=="number"){
+   let selectedOption;
+ 	 for(const r of x[i-1].querySelectorAll(`[name="c${i}"]`)){
+ 	  if(r.checked){
+ 	  selectedOption =`(${r.getAttribute('opt')})`;
+ 	  break;}
+ 	  else{selectedOption ="NA"}
+ 	 }
+ 	 document.getElementById("cAns").innerHTML +=`<span>${i}.${selectedOption}</span>`;
+ }//1st if
+  if(x[i-1].querySelector("input").getAttribute("type") =="number"){
+ let selectedNum;
+  if(x[i-1].querySelector("input").value !=""){
+  selectedNum =`(${x[i-1].querySelector("input").value})`;
+  }
+  else{selectedNum ="NA";}
+ document.getElementById("cAns").innerHTML +=`<span>${i}.${selectedNum}</span>`;
+ }//2nd if
+}//1st for
+
+for(i=1;i < mbOpt.getElementsByTagName("p").length+1;i++){
+var x = 	mbOpt.getElementsByTagName("p");
+ if(x[i-1].querySelector("input").getAttribute("type") !=="number"){
+   let selectedOption;
+ 	 for(const r of x[i-1].querySelectorAll(`[name="mb${i}"]`)){
+ 	  if(r.checked){
+ 	  selectedOption =`(${r.getAttribute('opt')})`;
+ 	  break;}
+ 	  else{selectedOption ="NA"}
+ 	 }
+ 	 document.getElementById("mbAns").innerHTML +=`<span>${i}.${selectedOption}</span>`;
+ }//1st if 
+ if(x[i-1].querySelector("input").getAttribute("type") =="number"){
+ let selectedNum;
+  if(x[i-1].querySelector("input").value !=""){
+  selectedNum =`(${x[i-1].querySelector("input").value})`;
+  }
+  else{selectedNum ="NA";}
+ document.getElementById("mbAns").innerHTML +=`<span>${i}.${selectedNum}</span>`;
+ }//2nd if
+}//1st for
+
+
+document.getElementById("result").style.display ="block";
+document.body.classList.add("result");
+clearInterval(interval);
+document.getElementById("timer").innerHTML="00:00:00";
+pOpt.querySelector("div").innerHTML ="";
+cOpt.querySelector("div").innerHTML ="";
+mbOpt.querySelector("div").innerHTML ="";
+document.getElementById("pdfContainer").innerHTML="";
+document.getElementById("select").selectedIndex = 0;
+document.querySelector(".box .uploadButton p").innerHTML ="Upload PDF";
+document.querySelector(".box .uploadButton i").style.display ="none";
+document.getElementById("fileInput").value = "";
+selectedPDF ="";
+document.querySelectorAll(".box div span input")[0].value ="";
+document.querySelectorAll(".box div span input")[1].value ="";
+document.querySelectorAll(".box div span input")[2].value ="";
+document.querySelectorAll(".optChild").forEach(element =>{
+if(Math.round(element.getBoundingClientRect().height) == 50){
+element.style.height ="150px";
+element.style.overflow ="scroll";
+element.querySelector("span i").style.transform ="rotate(180deg)";
+}
+else{
+element.style.height ="50px";
+element.style.overflow ="hidden";
+element.querySelector("span i").style.transform ="rotate(0deg)";
+}});
+document.getElementById("testBox").style.display ="none";
+}
+
+
+function resultOk(){
+var a = document.querySelectorAll("#result .answers")[0].innerHTML;
+var b = document.querySelectorAll("#result .answers")[1].innerHTML;
+var c = document.querySelectorAll("#result .answers")[2].innerHTML;
+var d = document.getElementById("testName").value;
+var today = new Date();
+var e = today.getDate().toString() + "-" + (today.getMonth()+1).toString() + "-" + today.getFullYear().toString();
+var f = today.getHours().toString() + ":" + today.getMinutes().toString();
+var g = (e+f).toString()
+var datalist =[a,b,c,d,e,f,g];
+
+localStorage.setItem(g, datalist);
+document.body.classList.remove("result");
+document.getElementById("result").style.display ="none";
+document.getElementById("testName").value ="";
+}
+
+//get localStorage
+function getLocal(){
+// Get all the keys in localStorage
+const keys = Object.keys(localStorage);
+const dict = {};
+for(const key of keys){
+  const value = localStorage.getItem(key);
+  dict[key] = value;
+}
+for(var key in dict){console.log(key+":"+dict[key]);}
+}
+
+   
+
+function makeRadioCorrect(){
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+      let lastChecked = null;
+
+      radioButtons.forEach(radioButton => {
+        radioButton.addEventListener("click", (e) => {
+          if (lastChecked === radioButton) {
+            radioButton.checked = false;
+            lastChecked = null;
+          } else {
+            radioButtons.forEach(rb => rb.classList.remove("active"));
+            radioButton.classList.add("active");
+            lastChecked = radioButton;
+          }
+        });
+      });
 }
 </script>
 </body>
