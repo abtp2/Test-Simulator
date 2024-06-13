@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+				<meta name="theme-color" content="#0d181a">
+				<link rel="manifest" href="manifest.json">
+				<link rel="stylesheet" href="icons/boxicons.css">
+			 <link rel="stylesheet" href="index.css"></link>
+			 <link rel="icon" type="image/png" href="logo.png">
+				<script src="pdfjs/pdf.js"></script>
+				<title>Test Simulator</title>
+</head>
+<body class="dark">
+<!-- custom alert -->	
+<div id="calert">
+ <div><span>Alert !</span><i onclick="closeCalert()" class="bx bx-x"></i></div>
+ <p id="calertPara">Hello dagadiyo !<br>How are you<br>hello</p>
+ <div id="calertButtons">
+ 	<button id="cancelAlert">Cancel</button>
+ 	<button id="okAlert">OK</button>
+ </div>
+</div>
+		
+<!-- navbar -->
+<div class="nav">
+ <div>
+ 	<img src="logo.png" onclick="testFunc()" alt="🥶">
+  <h1>Test Simulator</h1>
+ </div>
+ <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i>
+</div>
+
+
+<!--  -->
+<div class="container">
+  <div class="header">
+	<h1>Welcome to <span style="color: #00a7dd;font-family: cursive;">Test Simulator</span></h1>
+	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena... bkl mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i href="https://testsimulator.netlify.app">~ Ashutosh_dev</i></p>
+ </div>
+ <div class="box">
+ <h1>Select Details :</h1>
+ <select id="select">
+ 				<option>Select Exam</option>
+ 				<option>JEE Mains</option>
+ 				<option>NEET</option>
+ </select>
+ <input type="text" id="testName" placeholder="Name of your Test">
+ <div class="uploadButton"><p>Upload PDF</p> <i class="bx bx-check-circle"></i></div>
+ <p>No. of questions (custom)</p>
+ <div>
+ <span>P :<input type="number" placeholder="0"></span>
+ <span>C :<input type="number" placeholder="0"></span>
+ <span>M/B :<input type="number" placeholder="0"></span>
+ </div>
+ <button id="startTest" onclick="startTest()">Start Test</button>
+ </div>
+</div>
+<!-- container ended -->
+<!-- file input -->
+<input type="file" accept="application/pdf" id="fileInput" hidden>
+
+
+
+
+
+
+
+
+
+<!-- Main test box-->
+<div id="testBox">
+<div id="testNav">
+ <p><i class="bx bx-stopwatch"></i><span id="timer">00:00:00</span></p>
+ <div><i class="bx bx-chevron-down" onclick="testScrollDown()" abbr=""></i><button onclick="submitTest()">Submit</button>
+ <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i></div>
+</div>
+
+<section>
+<div id="pdfParent">
+	<div id="pdfContainer"></div>
+</div>
+
+<div id="optParent">
+ <div class="optChild" id="pOpt">
+   <span class="optToggle"><h1>Physics</h1><i class="bx bx-chevron-down"></i></span>
+   <div><!--  
+   <p>1. <input type="radio" opt="a" name="p1">
+         <input type="radio" opt="b" name="p1">
+         <input type="radio" opt="c" name="p1">
+         <input type="radio" opt="d" name="p1"></p>
+   <p>5. <input type="number" name="p5"></p>
+   <p>6. <input type="number" name="p6"></p>
+   <p>7. <input type="number" name="p7"></p>
+   <p>8. <input type="number" name="p8"></p> -->    
+   </div>
+ </div>
+ <div class="optChild" id="cOpt">
+   <span class="optToggle"><h1>Chemistry</h1><i class="bx bx-chevron-down"></i></span>
+   <div><!--  
+   <p>1. <input type="radio" opt="a" name="c1">
+         <input type="radio" opt="b" name="c1">
+         <input type="radio" opt="c" name="c1">
+        <input type="radio" opt="d" name="c1"></p>-->
+   </div>
+ </div>
+ <div class="optChild" id="mbOpt">
+   <span class="optToggle"><h1>Maths</h1><i class="bx bx-chevron-down"></i></span>
+   <div><!--
+   <p>1. <input type="radio" opt="a" name="mb1">
+         <input type="radio" opt="b" name="mb1">
+         <input type="radio" opt="c" name="mb1">
+       <input type="radio" opt="d" name="mb1"></p>-->
+    
+   </div>
+ </div>
+</div>
+</section>
+</div>
+
+
+<!-- Result -->
+<div id="result">
+ <h1>Test Results</h1>
+ <p>Physics</p>
+ <div class="answers" id="pAns"><!--
+ 	<span>1.(A)</span><span>2.(B)</span> -->
+ </div>
+ <p>Chemistry</p>
+ <div class="answers" id="cAns"></div>
+ <p>Maths</p>
+ <div class="answers" id="mbAns"></div>
+ <div><button onclick="resultOk()">Ok</button></div>
+</div>
+
+
+<!-- Later Result -->
+<div id="Lresult">
+ <h1>Test Results</h1>
+ <p>Physics</p>
+ <div class="Lanswers" id="LpAns"></div>
+ <p>Chemistry</p>
+ <div class="Lanswers" id="LcAns"></div>
+ <p>Maths/Biology</p>
+ <div class="Lanswers" id="LmbAns"></div>
+ <div><button onclick="LresultOk()">Close</button></div>
+</div>
+
+
+<!-- Stored Result -->
+<div id="storedBox">
+<h1></h1>
+ <div id="storedParent"><!--  
+ <div class="storedResult" id="">
+ 	<p>D&T:<span>13-12-20 & 14:43</span></p>
+ 	<p>Exam:<span>JEE Mains</span></p>
+ 	<h2>Physics Test Simulator</h2>
+ 	<i class="bx bx-link-external"></i>
+ 	<i class="bx bx-trash"></i>
+ </div> -->
+ </div>
+</div>
+
+
+<script>
+//window onload
+window.onload = function(){
+getLocal();
+ToOpenLaterResult();
+}
+
+//theme changer 
+function changeTheme(){
+var x = document.body.classList;
+var y = document.getElementsByClassName("themeIcon")[0];
+var z = document.getElementsByClassName("themeIcon")[1];
+if(x.contains("light")){
+x.replace("light", "dark");
+y.classList.replace("bx-moon", "bxs-sun");
+z.classList.replace("bx-moon", "bxs-sun");
+document.querySelector('meta[name="theme-color"]').setAttribute('content', "#0d181a");
+}
+else if(x.contains("dark")){
+x.replace("dark", "light");
+y.classList.replace("bxs-sun", "bx-moon");
+z.classList.replace("bxs-sun", "bx-moon");
+document.querySelector('meta[name="theme-color"]').setAttribute('content', "#ffffff");
+}}
+
+document.getElementsByClassName("uploadButton")[0].onclick = function(){
+document.getElementById("fileInput").click();
+}
+
+//select mains or neet
+document.getElementById("select").onchange = function(){
+var p = document.querySelectorAll(".box div span input")[0];
+var c = document.querySelectorAll(".box div span input")[1];
+var mb = document.querySelectorAll(".box div span input")[2];
+
+if(this.value=="JEE Mains"){
+p.value =30;c.value =30;mb.value =30;
+}
+if(this.value=="NEET"){
+p.value =50;c.value =50;mb.value =80;
+}}
+
+
+//prevnt refresh
+window.addEventListener('beforeunload', (event) =>{
+event.preventDefault();
+event.returnValue = "Do you want to exit ? /n All the items save will be deleted"; 
+});
+
+
+//scroll down test box answers 
+if(document.getElementById("testBox")){
+function testScrollDown(){
+  document.querySelector("#testBox").scrollTo({
+    top: document.querySelector("#testBox").scrollHeight,
+    behavior: 'smooth'
+  });		
+}}
+
+
+//pdf choose
+let selectedPDF;
+document.getElementById("fileInput").addEventListener('change', function(event) {
+const file = event.target.files[0];
+const button = document.getElementsByClassName("uploadButton")[0];
+if(file && file.type === 'application/pdf'){
+ selectedPDF = file;
+ button.querySelector("p").innerHTML = selectedPDF.name;
+ document.querySelector(".box .uploadButton i").style.display ="block";
+} 
+else{
+alert("Please select a valid PDF file.");
+}
+});
+
+//
+document.getElementById("fileInput").oninput = function(){
+}
+
+
+// make able start button
+function able(){
+var x = document.getElementById("select");
+var y = document.getElementsByClassName("uploadButton")[0];
+var z = document.getElementById("startTest");
+var a = document.getElementById("testName");
+var p = document.querySelectorAll(".box div span input")[0];
+var c = document.querySelectorAll(".box div span input")[1];
+var mb = document.querySelectorAll(".box div span input")[2];
+
+if(x.value !=="Select Exam" & a.value !=="" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !=="" & (p.value !=="0" || c.value !=="0" || mb.value !=="0")){
+z.style.opacity ="1";
+z.style.pointerEvents ="auto";
+}
+else{
+z.style.opacity ="0.6";
+z.style.pointerEvents ="none";	
+}}
+setInterval(able, 500);
+
+
+
+//not more then 2digit number of qeustions.
+document.querySelectorAll(".box div span input").forEach(element =>{
+element.oninput = function(){
+if(this.value.length > 2){
+this.value = this.value.slice(0, 2);
+}
+this.value = this.value.replace(/[+\-.]/g, '');
+}});
+
+
+
+
+// PDF JS
+var pdfScale = 1;
+function renderPDF(url, canvasContainer, options) {
+   // options = options || { scale: 1 };        
+    function renderPage(page){
+        var scale = pdfScale;
+        var viewport = page.getViewport(scale);
+        var wrapper = document.createElement("div");
+        wrapper.className = "canvas-wrapper";
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };        
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        wrapper.appendChild(canvas)
+        canvasContainer.appendChild(wrapper);
+        
+        page.render(renderContext);
+    }    
+    function renderPages(pdfDoc) {
+        for(var num = 1; num <= pdfDoc.numPages; num++)
+            pdfDoc.getPage(num).then(renderPage);
+    }
+    PDFJS.disableWorker = true;
+    PDFJS.getDocument(url).then(renderPages);
+}   
+// PDF JS
+
+
+
+//custom alert
+function cAlert(alertContent){
+var x = document.getElementById("calert");
+x.style.transition ="all 0.4s";
+x.style.top ="22%";
+document.body.classList.add("calert");
+document.getElementById("calertPara").innerHTML =alertContent;
+
+return new Promise((resolve, reject) =>{
+document.getElementById("okAlert").onclick = function(){resolve(true)}
+document.getElementById("cancelAlert").onclick = function(){resolve(false)}
+});
+}
+
+//close alert
+function closeCalert(){
+var x = document.getElementById("calert");
+x.style.transition ="all 0";
+x.style.top ="-400%";
+document.body.classList.remove("calert");
+}
+
+//StartTest 
+let srcFile;
+let selectedExam;
+let numberP; 
+let numberC;
+let numberMB;
+var pOpt = document.getElementById("pOpt");
+var cOpt = document.getElementById("cOpt");
+var mbOpt = document.getElementById("mbOpt");
+async function startTest(){
+const result = await cAlert("<b>Are you sure to start the test?</b><br><br>Test will start immediately if u press ok");
+if(result){
+const x = document.getElementById("testBox");
+var y = document.querySelectorAll(".canvas-wrapper");
+closeCalert();
+x.style.display ="block";
+srcFile = URL.createObjectURL(selectedPDF);
+
+if(y[0]){
+y.forEach(element => {
+if(element){
+element.remove();				
+}});
+}// 2nd if end
+renderPDF(srcFile, document.getElementById("pdfContainer"), 1);
+
+selectedExam=document.getElementById("select").value;
+numberP = parseInt(document.querySelector(".box div span:nth-of-type(1) input").value);
+numberC = parseInt(document.querySelector(".box div span:nth-of-type(2) input").value);
+numberMB = parseInt(document.querySelector(".box div span:nth-of-type(3) input").value);
+console.log(selectedExam + numberP + numberC + numberMB);
+
+
+if(selectedExam=="JEE Mains"){
+document.getElementsByClassName("optToggle")[2].querySelector("h1").innerHTML ="Maths";
+document.querySelectorAll("#result p")[2].innerHTML ="Maths";
+ if(numberP==30 & numberC==30 & numberMB==30){
+   for(i=1;i< 21;i++){
+   pOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="p${i}"><input type="radio" opt="B" name="p${i}"><input type="radio" opt="C" name="p${i}"><input type="radio" opt="D" name="p${i}"></p>`;
+   cOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="c${i}"><input type="radio" opt="B" name="c${i}"><input type="radio" opt="C" name="c${i}"><input type="radio" opt="D" name="c${i}"></p>`;
+   mbOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="mb${i}"><input type="radio" opt="B" name="mb${i}"><input type="radio" opt="C" name="mb${i}"><input type="radio" opt="D" name="mb${i}"></p>`;
+   }
+   for(i=21;i< 31;i++){
+   pOpt.querySelector("div").innerHTML +=`<p>${i}.<input type="number" name="p{i}"></p>`;
+   cOpt.querySelector("div").innerHTML +=`<p>${i}.<input type="number" name="p{i}"></p>`;
+   mbOpt.querySelector("div").innerHTML +=`<p>${i}.<input type="number" name="p{i}"></p>`;
+   }
+ }
+ else{
+ for(i=1;i< (numberP+1);i++){
+	pOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="p${i}"><input type="radio" opt="B" name="p${i}"><input type="radio" opt="C" name="p${i}"><input type="radio" opt="D" name="p${i}"></p>`;
+	}
+	for(i=1;i< (numberC+1);i++){
+	cOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="c${i}"><input type="radio" opt="B" name="c${i}"><input type="radio" opt="C" name="c${i}"><input type="radio" opt="D" name="c${i}"></p>`;
+	}
+	for(i=1;i< (numberMB+1);i++){
+	mbOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="mb${i}"><input type="radio" opt="B" name="mb${i}"><input type="radio" opt="C" name="mb${i}"><input type="radio" opt="D" name="mb${i}"></p>`;
+  }
+ }
+startCountdown(Math.round(parseInt(numberP)*2 + parseInt(numberC)*2 + parseInt(numberMB)*2));
+makeRadioCorrect();
+}
+if(selectedExam=="NEET"){
+document.getElementsByClassName("optToggle")[2].querySelector("h1").innerHTML ="Biology";
+document.querySelectorAll("#result p")[2].innerHTML ="Biology";
+  for(i=1;i< (numberP+1);i++){
+	pOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="p${i}"><input type="radio" opt="B" name="p${i}"><input type="radio" opt="C" name="p${i}"><input type="radio" opt="D" name="p${i}"></p>`;
+	}
+	for(i=1;i< (numberC+1);i++){
+	cOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="c${i}"><input type="radio" opt="B" name="c${i}"><input type="radio" opt="C" name="c${i}"><input type="radio" opt="D" name="c${i}"></p>`;
+	}
+	for(i=1;i< (numberMB+1);i++){
+	mbOpt.querySelector("div").innerHTML +=`<p>${i}. <input type="radio" opt="A" name="mb${i}"><input type="radio" opt="B" name="mb${i}"><input type="radio" opt="C" name="mb${i}"><input type="radio" opt="D" name="mb${i}"></p>`;
+  }  startCountdown(Math.round(parseInt(numberP)*1.1111111111 + parseInt(numberC)*1.1111111111 + parseInt(numberMB)*1.1111111111));
+makeRadioCorrect();  
+}
+
+}// 1st if end
+else{closeCalert()}
+}// function end
+
+
+
+
+//option toggle
+document.querySelectorAll(".optToggle").forEach(element =>{
+element.onclick = function(){
+var optChild = this.parentElement;
+if(Math.round(optChild.getBoundingClientRect().height) == 50){
+optChild.style.height ="150px";
+optChild.style.overflow ="scroll";
+this.querySelector("i").style.transform ="rotate(180deg)";
+}
+else{
+optChild.style.height ="50px";
+optChild.style.overflow ="hidden";
+this.querySelector("i").style.transform ="rotate(0deg)";
+}
+}});
+
+
+//submit test
+async function submitTest(){
+const result = await cAlert("<b>Are you sure to submit the test?");
+if(result){
+closeCalert();
+frsubmit();
+}
+else{
+closeCalert();
+}}
+
+
+
+//time
+let interval;
+function startCountdown(minutes){
+  let totalSeconds = minutes * 60;
+  const countdownElement = document.getElementById("timer");
+
+   interval = setInterval(() => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    const secs = totalSeconds % 60;
+
+    countdownElement.textContent = `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+    if(totalSeconds ===  Math.round(parseInt(minutes)*3.36)){
+      document.getElementById("timer").style.color ="#e7001c";
+    }
+    if(totalSeconds === 0) {
+      alert("Time's up!");
+      clearInterval(interval);
+      frsubmit();
+    }
+
+    totalSeconds--;
+  }, 1000);
+}
+
+//restrict user to input comma in testName
+document.getElementById("testName").oninput = function(){
+let value = event.target.value;
+event.target.value = value.replace(/,/g, '');	
+}
+
+
+function frsubmit(){
+for(i=1;i < pOpt.getElementsByTagName("p").length+1;i++){
+var x = 	pOpt.getElementsByTagName("p");
+ if(x[i-1].querySelector("input").getAttribute("type") !=="number"){
+   let selectedOption;
+ 	 for(const r of x[i-1].querySelectorAll(`[name="p${i}"]`)){
+ 	  if(r.checked){
+ 	  selectedOption =`(${r.getAttribute('opt')})`;
+ 	  break;}
+ 	  else{selectedOption ="NA"}
+ 	 }
+ 	 document.getElementById("pAns").innerHTML +=`<span>${i}.${selectedOption}</span>`;
+ }//1st if
+  if(x[i-1].querySelector("input").getAttribute("type") =="number"){
+ let selectedNum;
+  if(x[i-1].querySelector("input").value !=""){
+  selectedNum =`(${x[i-1].querySelector("input").value})`;
+  }
+  else{selectedNum ="NA";}
+ document.getElementById("pAns").innerHTML +=`<span>${i}.${selectedNum}</span>`;
+ }//2nd if
+}//1st for
+
+for(i=1;i < cOpt.getElementsByTagName("p").length+1;i++){
+var x = 	cOpt.getElementsByTagName("p");
+ if(x[i-1].querySelector("input").getAttribute("type") !=="number"){
+   let selectedOption;
+ 	 for(const r of x[i-1].querySelectorAll(`[name="c${i}"]`)){
+ 	  if(r.checked){
+ 	  selectedOption =`(${r.getAttribute('opt')})`;
+ 	  break;}
+ 	  else{selectedOption ="NA"}
+ 	 }
+ 	 document.getElementById("cAns").innerHTML +=`<span>${i}.${selectedOption}</span>`;
+ }//1st if
+  if(x[i-1].querySelector("input").getAttribute("type") =="number"){
+ let selectedNum;
+  if(x[i-1].querySelector("input").value !=""){
+  selectedNum =`(${x[i-1].querySelector("input").value})`;
+  }
+  else{selectedNum ="NA";}
+ document.getElementById("cAns").innerHTML +=`<span>${i}.${selectedNum}</span>`;
+ }//2nd if
+}//1st for
+
+for(i=1;i < mbOpt.getElementsByTagName("p").length+1;i++){
+var x = 	mbOpt.getElementsByTagName("p");
+ if(x[i-1].querySelector("input").getAttribute("type") !=="number"){
+   let selectedOption;
+ 	 for(const r of x[i-1].querySelectorAll(`[name="mb${i}"]`)){
+ 	  if(r.checked){
+ 	  selectedOption =`(${r.getAttribute('opt')})`;
+ 	  break;}
+ 	  else{selectedOption ="NA"}
+ 	 }
+ 	 document.getElementById("mbAns").innerHTML +=`<span>${i}.${selectedOption}</span>`;
+ }//1st if 
+ if(x[i-1].querySelector("input").getAttribute("type") =="number"){
+ let selectedNum;
+  if(x[i-1].querySelector("input").value !=""){
+  selectedNum =`(${x[i-1].querySelector("input").value})`;
+  }
+  else{selectedNum ="NA";}
+ document.getElementById("mbAns").innerHTML +=`<span>${i}.${selectedNum}</span>`;
+ }//2nd if
+}//1st for
+
+document.getElementById("timer").style.color ="var(--color)";
+document.getElementById("result").style.display ="block";
+document.body.classList.add("result");
+clearInterval(interval);
+document.getElementById("timer").innerHTML="00:00:00";
+pOpt.querySelector("div").innerHTML ="";
+cOpt.querySelector("div").innerHTML ="";
+mbOpt.querySelector("div").innerHTML ="";
+document.getElementById("pdfContainer").innerHTML="";
+document.querySelector(".box .uploadButton p").innerHTML ="Upload PDF";
+document.querySelector(".box .uploadButton i").style.display ="none";
+document.getElementById("fileInput").value = "";
+selectedPDF ="";
+document.querySelectorAll(".box div span input")[0].value ="";
+document.querySelectorAll(".box div span input")[1].value ="";
+document.querySelectorAll(".box div span input")[2].value ="";
+document.querySelectorAll(".optChild").forEach(element =>{
+if(Math.round(element.getBoundingClientRect().height) == 50){
+element.style.height ="150px";
+element.style.overflow ="scroll";
+element.querySelector("span i").style.transform ="rotate(180deg)";
+}
+else{
+element.style.height ="50px";
+element.style.overflow ="hidden";
+element.querySelector("span i").style.transform ="rotate(0deg)";
+}});
+document.getElementById("testBox").style.display ="none";
+}
+
+
+
+if(typeof localStorage !== 'undefined'){
+function resultOk(){
+var a = document.querySelectorAll("#result .answers")[0].innerHTML;
+var b = document.querySelectorAll("#result .answers")[1].innerHTML;
+var c = document.querySelectorAll("#result .answers")[2].innerHTML;
+var d = document.getElementById("testName").value;
+var e = document.getElementById("select").value;
+var today = new Date();
+var f = today.getDate().toString() + "-" + (today.getMonth()+1).toString() + "-" + today.getFullYear().toString().replace("20","");
+var g = today.getHours().toString() + ":" + today.getMinutes().toString();
+var h = today.getHours().toString() + ":" + today.getMinutes().toString() + ":" + today.getSeconds().toString();
+var i = (f+h).toString()
+var datalist =[a,b,c,d,e,f,g,h,i];
+localStorage.setItem(i, datalist);
+document.body.classList.remove("result");
+document.getElementById("result").style.display ="none";
+document.getElementById("testName").value ="";
+document.getElementById("select").selectedIndex = 0;
+getLocal();
+}
+
+//get localStorage
+function getLocal(){
+if(localStorage.length > 0){
+document.getElementById("storedBox").style.display ="block";
+const keys = Object.keys(localStorage);
+const dict = {};
+for(const key of keys){
+  const value = localStorage.getItem(key);
+  dict[key] = value;
+}
+ for(var key in dict){
+ if(!document.getElementById(`${key}`)){
+ document.getElementById("storedParent").innerHTML += `<div class="storedResult" id="${key}">
+<p>D&T:<span>${dict[key].split(",")[5]} & ${dict[key].split(",")[6]}</span></p>
+<p>Exam:<span>${dict[key].split(",")[4]}</span></p>
+ 	<h2>${dict[key].split(",")[3]}</h2>
+ 	<i class="bx bx-link-external"></i>
+ 	<i class="bx bx-trash"></i>
+ </div>`;
+ ToOpenLaterResult();
+ //console.log(key + dict[key].split(",")[1]);
+ }}
+}}
+   
+
+
+function ToOpenLaterResult(){
+document.querySelectorAll(".storedResult i:nth-of-type(1)").forEach(element =>{
+element.onclick = function(){
+document.getElementById("Lresult").style.display ="block";
+document.body.classList.add("result");
+var id = this.parentElement.id;
+var content= localStorage.getItem(id);
+var p = content.split(",")[0];
+var c = content.split(",")[1];
+var mb = content.split(",")[2];
+document.getElementById("LpAns").innerHTML = p;
+document.getElementById("LcAns").innerHTML = c;
+document.getElementById("LmbAns").innerHTML = mb;
+}});
+document.querySelectorAll(".storedResult i:nth-of-type(2)").forEach(element =>{
+element.onclick = function(){
+var x = this.parentElement;
+var id = x.id;
+localStorage.removeItem(id);
+x.remove();
+if(document.querySelectorAll("#storedParent .storedResult").length ==0){document.querySelector("#storedBox").style.display="none";}
+}});
+}
+
+
+}//if checking localStorage present
+
+
+function LresultOk(){
+document.getElementById("Lresult").style.display ="none";
+document.body.classList.remove("result");
+}
+
+
+
+function makeRadioCorrect(){
+const radioButtons = document.querySelectorAll('input[type="radio"]');
+      let lastChecked = null;
+
+      radioButtons.forEach(radioButton => {
+        radioButton.addEventListener("click", (e) => {
+          if (lastChecked === radioButton) {
+            radioButton.checked = false;
+            lastChecked = null;
+          } else {
+            radioButtons.forEach(rb => rb.classList.remove("active"));
+            radioButton.classList.add("active");
+            lastChecked = radioButton;
+          }
+        });
+      });
+}
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function(){
+  if ("serviceWorker" in navigator){
+    navigator.serviceWorker
+      .register("serviceWorker.js")
+      .then(res => console.log("Service worker registered"))
+      .catch(err => console.error("Service worker registration failed", err));
+  }
+});
+
+</script>
+</body>
+</html>
