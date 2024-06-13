@@ -7,7 +7,7 @@
   "background_color": "#0d181a",
   "orientation": "natural",
   "icons": [{
-    "src": "logoTS.png",
+    "src": "LogoTS.png",
     "type": "image/png",
     "sizes": "any"
   }]
