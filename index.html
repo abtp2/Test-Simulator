@@ -129,35 +129,45 @@
  <div class="answers" id="cAns"></div>
  <p>Maths</p>
  <div class="answers" id="mbAns"></div>
- <div><button>Download</button><button onclick="resultOk()">Ok</button></div>
+ <div><button onclick="resultOk()">Ok</button></div>
 </div>
 
 
-<!-- Later Result 
+<!-- Later Result -->
 <div id="Lresult">
  <h1>Test Results</h1>
  <p>Physics</p>
  <div class="Lanswers" id="LpAns"></div>
  <p>Chemistry</p>
  <div class="Lanswers" id="LcAns"></div>
- <p>Maths</p>
+ <p>Maths/Biology</p>
  <div class="Lanswers" id="LmbAns"></div>
  <div><button onclick="LresultOk()">Close</button></div>
-</div> -->
+</div>
 
 
 <!-- Stored Result -->
 <div id="storedBox">
 <h1></h1>
+ <div id="storedParent"><!--  
  <div class="storedResult" id="">
- 	<p>Date:<span id="resDate">13-12-2020</span>
- 	<p>Time: 14:37<span id="resTime"></span></p>
- 	<h2>Physics Test</h2>
+ 	<p>D&T:<span>13-12-20 & 14:43</span></p>
+ 	<p>Exam:<span>JEE Mains</span></p>
+ 	<h2>Physics Test Simulator</h2>
+ 	<i class="bx bx-link-external"></i>
+ 	<i class="bx bx-trash"></i>
+ </div> -->
  </div>
 </div>
 
 
 <script>
+//window onload
+window.onload = function(){
+getLocal();
+ToOpenLaterResult();
+}
+
 //theme changer 
 function changeTheme(){
 var x = document.body.classList;
@@ -232,7 +242,7 @@ var p = document.querySelectorAll(".box div span input")[0];
 var c = document.querySelectorAll(".box div span input")[1];
 var mb = document.querySelectorAll(".box div span input")[2];
 
-if(x.value !=="Select Exam" & a.value !=="" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !==""){
+if(x.value !=="Select Exam" & a.value !=="" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !=="" & (p.value !=="0" || c.value !=="0" || mb.value !=="0")){
 z.style.opacity ="1";
 z.style.pointerEvents ="auto";
 }
@@ -240,10 +250,17 @@ else{
 z.style.opacity ="0.6";
 z.style.pointerEvents ="none";	
 }}
-
 setInterval(able, 500);
 
 
+
+//not more then 2digit number of qeustions.
+document.querySelectorAll(".box div span input").forEach(element =>{
+element.oninput = function(){
+if(this.value.length > 2){
+this.value = this.value.slice(0, 2);
+}
+}});
 
 
 
@@ -436,10 +453,17 @@ function startCountdown(minutes){
     if(totalSeconds === 0) {
       alert("Time's up!");
       clearInterval(interval);
+      frsubmit();
     }
 
     totalSeconds--;
   }, 1000);
+}
+
+//restrict user to input comma in testName
+document.getElementById("testName").oninput = function(){
+let value = event.target.value;
+event.target.value = value.replace(/,/g, '');	
 }
 
 
@@ -510,7 +534,7 @@ var x = 	mbOpt.getElementsByTagName("p");
  }//2nd if
 }//1st for
 
-
+document.getElementById("timer").style.color ="var(--color)";
 document.getElementById("result").style.display ="block";
 document.body.classList.add("result");
 clearInterval(interval);
@@ -519,7 +543,6 @@ pOpt.querySelector("div").innerHTML ="";
 cOpt.querySelector("div").innerHTML ="";
 mbOpt.querySelector("div").innerHTML ="";
 document.getElementById("pdfContainer").innerHTML="";
-document.getElementById("select").selectedIndex = 0;
 document.querySelector(".box .uploadButton p").innerHTML ="Upload PDF";
 document.querySelector(".box .uploadButton i").style.display ="none";
 document.getElementById("fileInput").value = "";
@@ -542,36 +565,88 @@ document.getElementById("testBox").style.display ="none";
 }
 
 
+
+if(typeof localStorage !== 'undefined'){
 function resultOk(){
 var a = document.querySelectorAll("#result .answers")[0].innerHTML;
 var b = document.querySelectorAll("#result .answers")[1].innerHTML;
 var c = document.querySelectorAll("#result .answers")[2].innerHTML;
 var d = document.getElementById("testName").value;
+var e = document.getElementById("select").value;
 var today = new Date();
-var e = today.getDate().toString() + "-" + (today.getMonth()+1).toString() + "-" + today.getFullYear().toString();
-var f = today.getHours().toString() + ":" + today.getMinutes().toString();
-var g = (e+f).toString()
-var datalist =[a,b,c,d,e,f,g];
-
-localStorage.setItem(g, datalist);
+var f = today.getDate().toString() + "-" + (today.getMonth()+1).toString() + "-" + today.getFullYear().toString().replace("20","");
+var g = today.getHours().toString() + ":" + today.getMinutes().toString();
+var h = today.getHours().toString() + ":" + today.getMinutes().toString() + ":" + today.getSeconds().toString();
+var i = (f+h).toString()
+var datalist =[a,b,c,d,e,f,g,h,i];
+localStorage.setItem(i, datalist);
 document.body.classList.remove("result");
 document.getElementById("result").style.display ="none";
 document.getElementById("testName").value ="";
+document.getElementById("select").selectedIndex = 0;
+getLocal();
 }
 
 //get localStorage
 function getLocal(){
-// Get all the keys in localStorage
+if(localStorage.length > 0){
+document.getElementById("storedBox").style.display ="block";
 const keys = Object.keys(localStorage);
 const dict = {};
 for(const key of keys){
   const value = localStorage.getItem(key);
   dict[key] = value;
 }
-for(var key in dict){console.log(key+":"+dict[key]);}
+ for(var key in dict){
+ if(!document.getElementById(`${key}`)){
+ document.getElementById("storedParent").innerHTML += `<div class="storedResult" id="${key}">
+<p>D&T:<span>${dict[key].split(",")[5]} & ${dict[key].split(",")[6]}</span></p>
+<p>Exam:<span>${dict[key].split(",")[4]}</span></p>
+ 	<h2>${dict[key].split(",")[3]}</h2>
+ 	<i class="bx bx-link-external"></i>
+ 	<i class="bx bx-trash"></i>
+ </div>`;
+ ToOpenLaterResult();
+ //console.log(key + dict[key].split(",")[1]);
+ }}
+}}
+   
+
+
+function ToOpenLaterResult(){
+document.querySelectorAll(".storedResult i:nth-of-type(1)").forEach(element =>{
+element.onclick = function(){
+document.getElementById("Lresult").style.display ="block";
+document.body.classList.add("result");
+var id = this.parentElement.id;
+var content= localStorage.getItem(id);
+var p = content.split(",")[0];
+var c = content.split(",")[1];
+var mb = content.split(",")[2];
+document.getElementById("LpAns").innerHTML = p;
+document.getElementById("LcAns").innerHTML = c;
+document.getElementById("LmbAns").innerHTML = mb;
+}});
+document.querySelectorAll(".storedResult i:nth-of-type(2)").forEach(element =>{
+element.onclick = function(){
+var x = this.parentElement;
+var id = x.id;
+localStorage.removeItem(id);
+x.remove();
+if(document.querySelectorAll("#storedParent .storedResult").length ==0){document.querySelector("#storedBox").style.display="none";}
+}});
 }
 
-   
+
+}//if checking localStorage present
+
+
+function LresultOk(){
+document.getElementById("Lresult").style.display ="none";
+document.body.classList.remove("result");
+}
+
+
 
 function makeRadioCorrect(){
 const radioButtons = document.querySelectorAll('input[type="radio"]');
