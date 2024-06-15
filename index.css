@@ -404,6 +404,7 @@ justify-content: space-between;
 padding: 0 10px;
 position: sticky;
 top: 0;
+z-index: 10;
 }
 #testNav p{
 font-size: 19px;
@@ -797,3 +798,57 @@ padding: 4px;
 
 
 
+/* inbuilt result */
+#inbuiltBox{
+width: 90%;	
+margin: 2rem auto 6rem auto;
+display: block;
+background: var(--blurbg);
+border-radius: 5px;
+padding: 2.8rem 0.8rem 2px 0.8rem;
+position: relative;
+}
+@media(min-width: 768px){
+#inbuiltBox{
+width: 80%;	
+}}
+#inbuiltBox h1::before{
+content: 'Inbuilt Tests';
+position: absolute;
+left: 0;
+top: 0;
+background: #00a7dd;
+color: #fff;
+font-size: 16px;
+font-weight: 500;
+padding: 7px 10px;
+border-radius: 0 0 5px 0;
+}
+#inbuiltBox p{
+width: 100%;
+font-size:15px;
+color: var(--color);
+padding: 2px 2px 10px 2px;
+text-align: left;
+opacity: 0.95;
+}
+
+
+
+/* footer */
+#footer{
+width: 100%;
+display: flex;
+align-items: center;
+padding: 16px 8px;
+background: var(--blurbg);
+
+}
+#footer p{
+width: 100%;
+font-size: 16px;
+text-align: center;
+}
+#footer a{
+color: #00a7dd;
+}
