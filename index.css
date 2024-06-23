@@ -23,6 +23,7 @@ padding: 0;
 box-sizing: border-box;
 font-family: arial;
 overflow-x: hidden;
+user-select: none;
 }
 html::-webkit-scrollbar{
 height: 6px;
@@ -136,6 +137,10 @@ font-size: 30px;
 font-weight: 700;
 font-family: fantasy !important;
 }
+@media(max-width: 430px){
+.header h1{
+font-size: 25px;				
+}}
 .header p{
 max-width: 350px;
 margin-top: 0.7rem;
@@ -298,11 +303,18 @@ background: #00b6f1;
 color: #fff;
 font-weight: 900;
 font-size: 15px;
-border: 5px solid rgba(0,0,0,0.07);
+border: 5px solid rgba(0,0,0,0.02);
 opacity: 0.6;
 pointer-events: none;
 }
-/* border: 5px solid #00ace4; */
+.active-button{
+animation: blow 0.8s ease infinite;
+}
+@keyframes blow{
+from{outline: 0px solid rgba(0,167,221,0.25);}
+to{outline: 7px solid rgba(0,167,221,0.25);}
+}
+
 
 @media(min-width: 768px){
 .box{
@@ -467,6 +479,10 @@ height: 100%;
 margin: 0 auto;
 overflow: scroll;
 overflow-x: hidden;
+background-image: url('loading.gif');
+background-size: 30px 30px;
+background-repeat: no-repeat;
+background-position: center;
 }
 #pdfContainer::-webkit-scrollbar{
 width: 10px;
@@ -486,7 +502,7 @@ scrollbar-color: #0d181a transparent;
 
 .canvas-wrapper{
 width: 100%;
-margin-bottom: 16px;
+margin-bottom: 1;
 }
 canvas{
 width: 100%;
@@ -696,7 +712,7 @@ scrollbar-color: #00a7dd transparent;
 /* stored result */
 #storedBox{
 width: 90%;	
-margin: 3rem auto 2rem auto;
+margin: 3rem auto 3rem auto;
 display: none;
 background: var(--blurbg);
 border-radius: 5px;
@@ -801,11 +817,11 @@ padding: 4px;
 /* inbuilt result */
 #inbuiltBox{
 width: 90%;	
-margin: 2rem auto 6rem auto;
+margin: 2rem auto 3rem auto;
 display: block;
 background: var(--blurbg);
 border-radius: 5px;
-padding: 2.8rem 0.8rem 2px 0.8rem;
+padding: 3rem 0.8rem 0.8rem 0.8rem;
 position: relative;
 }
 @media(min-width: 768px){
@@ -824,14 +840,145 @@ font-weight: 500;
 padding: 7px 10px;
 border-radius: 0 0 5px 0;
 }
-#inbuiltBox p{
+#tabs{
 width: 100%;
-font-size:15px;
-color: var(--color);
-padding: 2px 2px 10px 2px;
-text-align: left;
-opacity: 0.95;
+display: flex;		
+align-items: center;
+overflow: scroll;
+background: var(--bg);
+border-radius: 5px 5px 0 0;
+padding: 9px;
+border-bottom: 2px solid var(--blurbg);
 }
+#tabs p{
+min-width: fit-content;
+font-size: 15px;
+font-weight: 400;
+margin-right: 10px;
+padding: 7px 10px;
+border-radius: 3px;
+background: var(--blurbg);
+letter-spacing: 0.8px;
+}
+.active-tab{
+outline: 2px inset #00a7dd;
+}
+#inbuiltBox section{
+background: var(--bg);
+width: 100%;
+height: 300px;
+display: flex;
+align-items: flex-start;
+overflow: hidden;
+padding: 6px 0;
+gap: 1rem;
+}
+#inbuiltBox section div{
+min-width: 100%;
+max-height: 100%;
+padding: 0 7px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+flex-wrap: wrap;
+overflow: scroll;
+}
+#inbuiltBox section::-webkit-scrollbar , #tabs::-webkit-scrollbar{
+display: none;opacity: 0;background: transparent;}
+#inbuiltBox section::-webkit-scrollbar-track , #tabs::-webkit-scrollbar-track{
+display: none;opacity: 0;background: transparent;}
+#inbuiltBox section::-webkit-scrollbar-thumb , #tabs::-webkit-scrollbar-thumb{
+display: none;opacity: 0;background: transparent;}
+
+#inbuiltBox section p{
+max-width: fit-content;
+height: 58px;
+font-size: 15px;
+padding: 0 12px;
+border: 3px solid var(--blurbg);
+border-radius: 3px;
+margin: 8px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+}
+#inbuiltBox section p span{
+font-size: 11.5px;
+opacity: 0.7;
+margin-top: 1.2px;
+}
+@media(min-width: 768px){
+#inbuiltBox section{
+height: 200px;
+}}
+#inbuiltBox select{
+position: absolute;
+top: 6px;
+right: 12px;
+height: 34px;
+border-radius: 5px;
+background: var(--bg);
+color: var(--color);
+padding: 0 6px;
+outline: none;
+}
+#inbuiltBox select option{
+background: var(--bg);
+color: var(--color);
+}
+
+
+
+/* Extras */
+#extras{
+width: 90%;	
+margin: 2rem auto 6rem auto;
+display: block;
+background: var(--blurbg);
+border-radius: 5px;
+padding: 3rem 0.8rem 0.8rem 0.8rem;
+position: relative;
+}
+@media(min-width: 768px){
+#extras{
+width: 80%;	
+}}
+#extras h1::before{
+content: 'Extras';
+position: absolute;
+left: 0;
+top: 0;
+background: #00a7dd;
+color: #fff;
+font-size: 16px;
+font-weight: 500;
+padding: 7px 10px;
+border-radius: 0 0 5px 0;
+}
+#extras p{
+font-size: 15px;
+color: var(--color);
+opacity: 0.9;
+line-height: 1.55;
+}
+#extras p i{
+font-size: 18px;
+font-weight: 500;
+margin-right: 5px;
+}
+#extras div{
+width: 100%;
+display: flex;		
+flex-direction: column;
+gap: 0.6rem;
+justify-content: center;
+background: var(--bg);
+border-radius: 5px 5px 0 0;
+padding: 9px;
+border-bottom: 1px solid var(--blurbg);
+}
+
 
 
 
@@ -840,9 +987,8 @@ opacity: 0.95;
 width: 100%;
 display: flex;
 align-items: center;
-padding: 16px 8px;
+padding: 16px 7px;
 background: var(--blurbg);
-
 }
 #footer p{
 width: 100%;
@@ -852,3 +998,7 @@ text-align: center;
 #footer a{
 color: #00a7dd;
 }
+@media(max-width: 360px){
+#footer p{
+transform: scaleX(0.9);			
+}}

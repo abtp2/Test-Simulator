@@ -25,7 +25,7 @@
 <!-- navbar -->
 <div class="nav">
  <div>
- 	<img src="logo.png" onclick="testFunc()" alt="🥶">
+ 	<img src="logo.png" alt="🥶">
   <h1>Test Simulator</h1>
  </div>
  <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i>
@@ -36,7 +36,7 @@
 <div class="container">
   <div class="header">
 	<h1>Welcome to <span style="color: #00a7dd;font-family: cursive;">Test Simulator</span></h1>
-	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena... bkl mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i href="https://testsimulator.netlify.app">~ Ashutosh_dev</i></p>
+	<p>"Saal bhar bas lectures hi dekho, first attempt as a mock de dena.... mock tests do"<br>&nbsp;&nbsp;&nbsp;&nbsp; <i href="https://testsimulator.netlify.app">~ Ashutosh_dev</i></p>
  </div>
  <div class="box">
  <h1>Select Details :</h1>
@@ -130,7 +130,7 @@
  <div class="answers" id="cAns"></div>
  <p>Maths</p>
  <div class="answers" id="mbAns"></div>
- <div><button onclick="resultOk()">Ok</button></div>
+ <div><button id="resultOk">Ok</button></div>
 </div>
 
 
@@ -165,7 +165,74 @@
 <!-- inbuilt Tests -->
 <div id="inbuiltBox">
 <h1></h1>
-<p>Coming Soon....</p>
+<select><option>JEE Mains</option><option>NEET</option></select>
+ <div id="tabs">
+ <p class="active-tab" data-content="0">Allen</p>
+ <p data-content="1">Mathango</p>
+ <p data-content="2">Narayana</p>
+ <p data-content="3">Competishun</p>
+ </div>
+ 
+ <section>
+  <div>
+  <p>Major Test - 1<br><span>Full syllabus</span></p>
+  <p>Major Test - 2<br><span>Full syllabus</span></p>
+  <p>Major Test - 3<br><span>Full syllabus</span></p>
+  <p>Major Test - 4<br><span>Full syllabus</span></p>
+  <p>Major Test - 5<br><span>Full syllabus</span></p>
+  <p>Major Test - 6<br><span>Full syllabus</span></p>
+  </div>
+  <div>
+  <p>Test - 1<br><span>Full syllabus</span></p>
+  <p>Test - 2<br><span>Full syllabus</span></p>
+  <p>Test - 3<br><span>Full syllabus</span></p>
+  <p>Test - 4<br><span>Full syllabus</span></p>
+  <p>Test - 5<br><span>Full syllabus</span></p>
+  <p>Test - 6<br><span>Full syllabus</span></p>
+  <p>Test - 7<br><span>Full syllabus</span></p>
+  <p>Test - 8<br><span>Full syllabus</span></p>
+  <p>Test - 9<br><span>Full syllabus</span></p>
+  <p>Test - 10<br><span>Full syllabus</span></p>
+  </div>
+  <div>
+  <p>Mains Test - 1<br><span>Full syllabus</span></p>
+  <p>Mains Test - 2<br><span>Full syllabus</span></p>
+  <p>Mains Test - 3<br><span>Full syllabus</span></p>
+  <p>Mains Test - 4<br><span>Full syllabus</span></p>
+  <p>Mains Test - 5<br><span>Full syllabus</span></p>
+  <p>Mains Test - 6<br><span>Full syllabus</span></p>
+  <p>Mains Test - 7<br><span>Full syllabus</span></p>
+  <p>Mains Test - 8<br><span>Full syllabus</span></p>
+  </div>
+  <div>
+  <p data="1,1,competishun">MFST - 1<br><span>Full syllabus</span></p>
+  <p data="2,1,competishun">MFST - 2<br><span>Full syllabus</span></p>
+  <p data="3,1,competishun">MFST - 3<br><span>Full syllabus</span></p>
+  <p data="4,1,competishun">MFST - 4<br><span>Full syllabus</span></p>
+  <p data="5,1,competishun">MFST - 5<br><span>Full syllabus</span></p>
+  <p data="6,1,competishun">MFST - 6<br><span>Full syllabus</span></p>
+  <p data="7,1,competishun">MFST - 7<br><span>Full syllabus</span></p>
+  <p data="8,1,competishun">MFST - 8<br><span>Full syllabus</span></p>
+  <p data="9,1,competishun">MFST - 9<br><span>Full syllabus</span></p>
+  <p data="10,1,competishun">MFST - 10<br><span>Full syllabus</span></p>
+  <p data="11,1,competishun">MFST - 11<br><span>Full syllabus</span></p>
+  <p data="12,1,competishun">MFST - 12<br><span>Full syllabus</span></p>
+  <p data="13,1,competishun">MFST - 13<br><span>Full syllabus</span></p>
+  <p data="14,1,competishun">MFST - 14<br><span>Full syllabus</span></p>
+  </div>
+ </section>
+</div>
+
+
+
+<!-- Extras -->
+<div id="extras">
+<h1></h1>
+<div>
+<p><i class="bx bxs-bookmark-alt"></i>Tests taken (worldwide) :&nbsp;<span id="testCount">...</span></p>
+<p><i class="bx bxs-bookmark-alt"></i>Inbuilt tests for JEE Mains :&nbsp;<span>20</span></p>
+<p><i class="bx bxs-bookmark-alt"></i>Inbuilt tests for NEET :&nbsp;<span>20</span></p>
+</div>
 </div>
 
 
@@ -175,12 +242,23 @@
 </div>
 
 
+
 <script>
 //window onload
 window.onload = function(){
 getLocal();
 ToOpenLaterResult();
 }
+
+//check if user is online
+let isUserOnline;
+setInterval(function(){
+if(navigator.onLine){
+isUserOnline = true;
+}else{
+isUserOnline = false;
+}}, 500);
+
 
 //theme changer 
 function changeTheme(){
@@ -250,9 +328,6 @@ alert("Please select a valid PDF file.");
 }
 });
 
-//
-document.getElementById("fileInput").oninput = function(){
-}
 
 
 // make able start button
@@ -268,10 +343,12 @@ var mb = document.querySelectorAll(".box div span input")[2];
 if(x.value !=="Select Exam" & a.value !=="" & !y.innerHTML.includes("Upload PDF") & p.value !=="" & c.value !=="" & mb.value !=="" & (p.value !=="0" || c.value !=="0" || mb.value !=="0")){
 z.style.opacity ="1";
 z.style.pointerEvents ="auto";
+z.classList.add("active-button");
 }
 else{
 z.style.opacity ="0.6";
-z.style.pointerEvents ="none";	
+z.style.pointerEvents ="none";
+z.classList.remove("active-button");
 }}
 setInterval(able, 500);
 
@@ -359,8 +436,10 @@ if(result){
 const x = document.getElementById("testBox");
 var y = document.querySelectorAll(".canvas-wrapper");
 closeCalert();
+document.querySelector(".box button").classList.remove("active-button");
 x.style.display ="block";
-srcFile = URL.createObjectURL(selectedPDF);
+if(typeof(selectedPDF)=="object"){
+srcFile = URL.createObjectURL(selectedPDF);}else{srcFile = selectedPDF;}
 
 if(y[0]){
 y.forEach(element => {
@@ -433,7 +512,7 @@ document.querySelectorAll(".optToggle").forEach(element =>{
 element.onclick = function(){
 var optChild = this.parentElement;
 if(Math.round(optChild.getBoundingClientRect().height) == 50){
-optChild.style.height ="150px";
+optChild.style.height ="200px";
 optChild.style.overflow ="scroll";
 this.querySelector("i").style.transform ="rotate(180deg)";
 }
@@ -576,7 +655,7 @@ document.querySelectorAll(".box div span input")[1].value ="";
 document.querySelectorAll(".box div span input")[2].value ="";
 document.querySelectorAll(".optChild").forEach(element =>{
 if(Math.round(element.getBoundingClientRect().height) == 50){
-element.style.height ="150px";
+element.style.height ="200px";
 element.style.overflow ="scroll";
 element.querySelector("span i").style.transform ="rotate(180deg)";
 }
@@ -591,7 +670,7 @@ document.getElementById("testBox").style.display ="none";
 
 
 if(typeof localStorage !== 'undefined'){
-function resultOk(){
+document.querySelector("#resultOk").addEventListener('click', () => {
 var a = document.querySelectorAll("#result .answers")[0].innerHTML;
 var b = document.querySelectorAll("#result .answers")[1].innerHTML;
 var c = document.querySelectorAll("#result .answers")[2].innerHTML;
@@ -601,7 +680,7 @@ var today = new Date();
 var f = today.getDate().toString() + "-" + (today.getMonth()+1).toString() + "-" + today.getFullYear().toString().replace("20","");
 var g = today.getHours().toString() + ":" + today.getMinutes().toString();
 var h = today.getHours().toString() + ":" + today.getMinutes().toString() + ":" + today.getSeconds().toString();
-var i = (f+h).toString()
+var i = "devAshutosh" + (f+h).toString();
 var datalist =[a,b,c,d,e,f,g,h,i];
 localStorage.setItem(i, datalist);
 document.body.classList.remove("result");
@@ -609,13 +688,20 @@ document.getElementById("result").style.display ="none";
 document.getElementById("testName").value ="";
 document.getElementById("select").selectedIndex = 0;
 getLocal();
-}
+});
 
 //get localStorage
 function getLocal(){
 if(localStorage.length > 0){
 document.getElementById("storedBox").style.display ="block";
-const keys = Object.keys(localStorage);
+//const keys = Object.keys(localStorage);
+const keys =[];
+for (let i=0;i < localStorage.length;i++){
+let key = localStorage.key(i); 
+if(key.startsWith("devAshutosh")){
+keys.push(key);
+}}
+
 const dict = {};
 for(const key of keys){
   const value = localStorage.getItem(key);
@@ -652,11 +738,15 @@ document.getElementById("LcAns").innerHTML = c;
 document.getElementById("LmbAns").innerHTML = mb;
 }});
 document.querySelectorAll(".storedResult i:nth-of-type(2)").forEach(element =>{
-element.onclick = function(){
+element.onclick = async function(){
 var x = this.parentElement;
 var id = x.id;
+const result = await cAlert("Do you want to delete?");
+if(result){
 localStorage.removeItem(id);
 x.remove();
+closeCalert();
+}else{closeCalert();}
 if(document.querySelectorAll("#storedParent .storedResult").length ==0){document.querySelector("#storedBox").style.display="none";}
 }});
 }
@@ -692,8 +782,20 @@ const radioButtons = document.querySelectorAll('input[type="radio"]');
 
 
 
+//inbuiltBox tests
+document.querySelectorAll("#tabs p").forEach(element =>{
+element.onclick = function(){
+var x = document.querySelectorAll("#inbuiltBox section div")[element.getAttribute("data-content")];
+x.scrollIntoView({behavior: "smooth", block: 'nearest', inline: 'start'});
+
+document.querySelectorAll("#tabs p").forEach(d => d.classList.remove("active-tab"));
+element.classList.add("active-tab");
+}});
 
 
+
+
+//serviceWorker 
 document.addEventListener("DOMContentLoaded", function(){
   if ("serviceWorker" in navigator){
     navigator.serviceWorker
@@ -703,6 +805,73 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 });
 
+
+
+//inbuilt test p
+document.querySelectorAll("#inbuiltBox section div p").forEach(element =>{
+var p = document.querySelectorAll(".box div span input")[0];
+var c = document.querySelectorAll(".box div span input")[1];
+var mb = document.querySelectorAll(".box div span input")[2];
+element.onclick = function(){
+var index = element.getAttribute("data").split(",")[0];
+var exam = element.getAttribute("data").split(",")[1];
+var testName = element.innerHTML.split('<br>')[0];;
+var institute = element.getAttribute("data").split(",")[2];
+if(exam=="1"){p.value =30;c.value =30;mb.value =30;}
+else{p.value =50;c.value =50;mb.value =80;}
+
+document.getElementById("select").selectedIndex = exam;
+document.getElementById("testName").value= testName;
+document.querySelector(".uploadButton p").innerHTML= testName;
+document.querySelector(".uploadButton i").style.display ="block";
+selectedPDF =`https://abtp2.github.io/Test-Simulator/${institute}/${index}.pdf`;
+window.scrollTo({top: 0,behavior: "smooth"});
+}});
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+import {getFirestore, collection, addDoc, enableIndexedDbPersistence, onSnapshot } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+
+const firebaseConfig ={
+apiKey: "AIzaSyDOXu1IldFKHeXx_PADuyzTpE2egxaSHb4",
+authDomain: "testsimulator-9c07b.firebaseapp.com",
+projectId: "testsimulator-9c07b",
+storageBucket: "testsimulator-9c07b.appspot.com",
+messagingSenderId: "446714875925",
+appId: "1:446714875925:web:7736fd557ae9b79846be1c",
+measurementId: "G-NFQHYPW060"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Enable offline data persistence
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+   if (err.code === 'failed-precondition'){
+   console.log("Persistence failed: Multiple tabs open.");
+   }else if(err.code === 'unimplemented'){
+   console.log("Persistence is not available.");
+   }
+  });
+
+const clicksCollection = collection(db, 'clicks');
+async function logClick(){
+await addDoc(clicksCollection, {timestamp: new Date() });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+const clickCountElement = document.getElementById('testCount');
+
+// Real-time listener for the click count
+onSnapshot(clicksCollection, (snapshot) =>{
+clickCountElement.textContent = snapshot.size;
+});
+document.querySelector("#resultOk").addEventListener('click', async () =>{
+await logClick();
+});
+});
 </script>
 </body>
 </html>
