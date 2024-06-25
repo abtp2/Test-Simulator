@@ -895,10 +895,10 @@ justify-content: flex-start;
 flex-wrap: wrap;
 overflow: scroll;
 }
-#inbuiltBox section::-webkit-scrollbar, #tabs::-webkit-scrollbar{
+#inbuiltBox section::-webkit-scrollbar , #tabs::-webkit-scrollbar{
 display: none;
 }
-#inbuiltBox section, #tabs{
+#inbuiltBox section , #tabs{
 scrollbar-width: none;
 -ms-overflow-style: none;
 }
