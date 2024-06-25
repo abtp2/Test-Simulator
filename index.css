@@ -89,7 +89,13 @@ background: var(--blurbg);
 padding: 10px;
 border-radius: 100%;
 }
-
+.spin{
+animation: spin 1s linear infinite;
+}
+@keyframes spin{
+0%{transform: rotate(0);}
+100%{transform: rotate(360deg);}
+}
 
 @media(min-width: 600px){
 .nav div h1{
@@ -884,11 +890,11 @@ flex-wrap: wrap;
 overflow: scroll;
 }
 #inbuiltBox section::-webkit-scrollbar , #tabs::-webkit-scrollbar{
-display: none;opacity: 0;background: transparent;}
+width:0;height:0;display: none;opacity: 0;background: transparent;}
 #inbuiltBox section::-webkit-scrollbar-track , #tabs::-webkit-scrollbar-track{
-display: none;opacity: 0;background: transparent;}
+width:0;height:0;display: none;opacity: 0;background: transparent;}
 #inbuiltBox section::-webkit-scrollbar-thumb , #tabs::-webkit-scrollbar-thumb{
-display: none;opacity: 0;background: transparent;}
+width:0;height:0;display: none;opacity: 0;background: transparent;}
 
 #inbuiltBox section p{
 max-width: fit-content;

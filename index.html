@@ -29,7 +29,7 @@
   <h1>Test Simulator</h1>
  </div>
  <span>
- <i class="bx bxs-download" id="installButton"></i>
+ <i class="bx bx-download" id="installButton"></i>
  <i onclick="changeTheme()" class="themeIcon bx bxs-sun"></i>
  </span>
 </div>
@@ -813,14 +813,16 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  alert(`'beforeinstallprompt' event was fired.`);
+  console.log(`'beforeinstallprompt' event was fired.`);
 });
-document.getElementById("installButton").addEventListener('click', async () => {
-  // Show the install prompt
+document.getElementById("installButton").addEventListener('click', async function(){ 
+  //show the install prompt
+  this.className = "bx bx-loader-alt spin";
   deferredPrompt.prompt();
   // Wait for the user to respond to the prompt
-  const { outcome } = await deferredPrompt.userChoice;
-  alert(`User response to the install prompt: ${outcome}`);
+  const {outcome}= await deferredPrompt.userChoice;
+  alert(`User response: ${outcome}`);
+  this.className = "bx bx-download";
   deferredPrompt = null;
 });
 
