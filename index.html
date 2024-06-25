@@ -821,7 +821,7 @@ document.getElementById("installButton").addEventListener('click', async functio
   deferredPrompt.prompt();
   // Wait for the user to respond to the prompt
   const {outcome}= await deferredPrompt.userChoice;
-  alert(`User response: ${outcome}`);
+  console.log(`User response: ${outcome}`);
   this.className = "bx bx-download";
   deferredPrompt = null;
 });

@@ -889,12 +889,13 @@ justify-content: flex-start;
 flex-wrap: wrap;
 overflow: scroll;
 }
-#inbuiltBox section::-webkit-scrollbar , #tabs::-webkit-scrollbar{
-width:0;height:0;display: none;opacity: 0;background: transparent;}
-#inbuiltBox section::-webkit-scrollbar-track , #tabs::-webkit-scrollbar-track{
-width:0;height:0;display: none;opacity: 0;background: transparent;}
-#inbuiltBox section::-webkit-scrollbar-thumb , #tabs::-webkit-scrollbar-thumb{
-width:0;height:0;display: none;opacity: 0;background: transparent;}
+#inbuiltBox section::-webkit-scrollbar, 
+#tabs::-webkit-scrollbar{display: none;width: 0;height: 0;background: transparent;}
+#inbuiltBox section::-webkit-scrollbar-track, 
+#tabs::-webkit-scrollbar-track, 
+#inbuiltBox section::-webkit-scrollbar-thumb, 
+#tabs::-webkit-scrollbar-thumb{background: transparent;}
+
 
 #inbuiltBox section p{
 max-width: fit-content;
