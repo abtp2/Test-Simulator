@@ -810,12 +810,17 @@ document.addEventListener("DOMContentLoaded", function(){
 
 //install button
 let deferredPrompt;
+const installButton = document.getElementById("installButton");
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  console.log(`'beforeinstallprompt' event was fired.`);
+  if(deferredPrompt){
+  installButton.style.display ="block";
+  console.log(`'beforeinstallprompt' event was fired.`)}else{
+  installButton.style.display ="none"
+  }
 });
-document.getElementById("installButton").addEventListener('click', async function(){ 
+installButton.addEventListener('click', async function(){ 
   //show the install prompt
   this.className = "bx bx-loader-alt spin";
   deferredPrompt.prompt();
@@ -826,6 +831,10 @@ document.getElementById("installButton").addEventListener('click', async functio
   deferredPrompt = null;
 });
 
+window.addEventListener('appinstalled', () => {
+installButton.style.display ="none";
+deferredPrompt = null;
+});
 
 
 
