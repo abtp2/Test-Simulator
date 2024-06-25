@@ -82,6 +82,9 @@ font-weight: 700;
 font-family: fantasy !important;
 display: none;
 }
+.nav span{
+display: flex;
+}
 .nav i{
 font-size: 25px;
 margin-right: 5px;
