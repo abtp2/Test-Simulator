@@ -700,7 +700,13 @@ getLocal();
 
 //get localStorage
 function getLocal(){
-if(localStorage.length > 0){
+function keyStartsWith(prefix){
+ for(let i = 0; i < localStorage.length; i++){
+ const key = localStorage.key(i);
+ if(key.startsWith(prefix)){return true;}}
+ return false;
+}
+if(keyStartsWith("devAshutosh")){
 document.getElementById("storedBox").style.display ="block";
 //const keys = Object.keys(localStorage);
 const keys =[];
