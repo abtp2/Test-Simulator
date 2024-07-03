@@ -1,6 +1,6 @@
 {
   "name": "Test Simulator",
-  "short_name": "T.S.",
+  "short_name": "Test Simulator",
   "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#0d181a",
